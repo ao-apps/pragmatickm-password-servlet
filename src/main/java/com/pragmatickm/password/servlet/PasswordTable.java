@@ -114,22 +114,26 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
 	@Override
 	protected void doBody(CaptureLevel captureLevel, Body<? super com.pragmatickm.password.model.PasswordTable> body) throws ServletException, IOException, SkipPageException {
 		super.doBody(captureLevel, body);
-		BufferWriter out = (captureLevel == CaptureLevel.BODY) ? new SegmentedWriter() : null;
-		// TODO: Auto temp file here for arbitrary size content within passwordTable?
-		try {
-			PasswordTableImpl.writePasswordTable(
-				servletContext,
-				request,
-				response,
-				out,
-				element,
-				passwords,
-				style
-			);
-		} finally {
-			if(out != null) out.close();
+		if(captureLevel == CaptureLevel.BODY) {
+			BufferWriter out = new SegmentedWriter();
+			// TODO: Auto temp file here for arbitrary size content within passwordTable?
+			try {
+				PasswordTableImpl.writePasswordTable(
+					servletContext,
+					request,
+					response,
+					out,
+					element,
+					passwords,
+					style
+				);
+			} finally {
+				out.close();
+			}
+			writeMe = out.getResult();
+		} else {
+			writeMe = null;
 		}
-		writeMe = out==null ? null : out.getResult();
 	}
 
 	@Override
