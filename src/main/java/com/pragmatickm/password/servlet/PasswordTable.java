@@ -118,20 +118,19 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
 	protected void doBody(CaptureLevel captureLevel, Body<? super com.pragmatickm.password.model.PasswordTable> body) throws ServletException, IOException, SkipPageException {
 		super.doBody(captureLevel, body);
 		if(captureLevel == CaptureLevel.BODY) {
-			BufferWriter capturedOut = new SegmentedWriter();
-			try {
-				// Enable temp files if temp file context active
-				capturedOut = TempFileContext.wrapTempFileList(
-					capturedOut,
-					request,
-					// Java 1.8: AutoTempFileWriter::new
-					new TempFileContext.Wrapper<BufferWriter>() {
-						@Override
-						public BufferWriter call(BufferWriter original, TempFileList tempFileList) {
-							return new AutoTempFileWriter(original, tempFileList);
-						}
+			// Enable temp files if temp file context active
+			BufferWriter capturedOut = TempFileContext.wrapTempFileList(
+				new SegmentedWriter(),
+				request,
+				// Java 1.8: AutoTempFileWriter::new
+				new TempFileContext.Wrapper<BufferWriter>() {
+					@Override
+					public BufferWriter call(BufferWriter original, TempFileList tempFileList) {
+						return new AutoTempFileWriter(original, tempFileList);
 					}
-				);
+				}
+			);
+			try {
 				PasswordTableImpl.writePasswordTable(
 					servletContext,
 					request,
