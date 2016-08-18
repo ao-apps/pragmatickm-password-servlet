@@ -30,6 +30,7 @@ import com.semanticcms.core.servlet.CaptureLevel;
 import com.semanticcms.core.servlet.Element;
 import com.semanticcms.core.servlet.PageContext;
 import com.semanticcms.core.servlet.PageIndex;
+import com.semanticcms.core.servlet.SemanticCMS;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.ServletContext;
@@ -39,6 +40,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.SkipPageException;
 
 public class Password extends Element<com.pragmatickm.password.model.Password> {
+
+	public static final String DEMO_MODE_PASSWORD = "********";
 
 	public Password(
 		ServletContext servletContext,
@@ -52,7 +55,8 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 			response,
 			new com.pragmatickm.password.model.Password()
 		);
-		element.setPassword(password);
+		boolean demoMode = SemanticCMS.getInstance(servletContext).getDemoMode();
+		element.setPassword(demoMode ? DEMO_MODE_PASSWORD : password);
 	}
 
 	/**
