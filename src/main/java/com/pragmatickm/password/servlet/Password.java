@@ -101,7 +101,8 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 	}
 
 	public Password secretQuestion(String question, String answer) {
-		element.addSecretQuestion(question, answer);
+		boolean demoMode = SemanticCMS.getInstance(servletContext).getDemoMode();
+		element.addSecretQuestion(question, demoMode ? DEMO_MODE_PASSWORD : answer);
 		return this;
 	}
 
