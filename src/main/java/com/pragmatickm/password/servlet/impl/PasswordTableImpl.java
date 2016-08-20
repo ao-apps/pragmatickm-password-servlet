@@ -38,6 +38,7 @@ import com.semanticcms.core.model.PageRef;
 import com.semanticcms.core.servlet.CaptureLevel;
 import com.semanticcms.core.servlet.CapturePage;
 import com.semanticcms.core.servlet.PageIndex;
+import com.semanticcms.core.servlet.SemanticCMS;
 import com.semanticcms.core.servlet.ServletElementContext;
 import com.semanticcms.core.servlet.impl.LinkImpl;
 import com.semanticcms.core.servlet.impl.UrlUtils;
@@ -66,6 +67,7 @@ final public class PasswordTableImpl {
 		List<Password> passwords,
 		String style
 	) throws IOException, ServletException {
+		SemanticCMS semanticCMS = SemanticCMS.getInstance(servletContext);
 		PageIndex pageIndex = PageIndex.getCurrentPageIndex(request);
 		// Combine attribute and body
 		List<Password> allPasswords = new ArrayList<Password>(passwords);
@@ -283,7 +285,7 @@ final public class PasswordTableImpl {
 									}
 									out.write('"');
 									if(targetElement != null) {
-										String linkCssClass = targetElement.getLinkCssClass();
+										String linkCssClass = semanticCMS.getLinkCssClass(targetElement);
 										if(linkCssClass != null) {
 											out.write(" class=\"");
 											encodeTextInXhtmlAttribute(linkCssClass, out);
