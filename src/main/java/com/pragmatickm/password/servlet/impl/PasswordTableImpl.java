@@ -352,7 +352,13 @@ final public class PasswordTableImpl {
 							out.write('"');
 						}
 					}
-					out.write(" class=\"passwordIcon\">");
+					String linkCssClass = semanticCMS.getLinkCssClass(password);
+					if(linkCssClass != null) {
+						out.write(" class=\"");
+						encodeTextInXhtmlAttribute(linkCssClass, out);
+						out.write('"');
+					}
+					out.write('>');
 					encodeTextInXhtml(password.getPassword(), out);
 					out.write("</span></td>\n");
 				}

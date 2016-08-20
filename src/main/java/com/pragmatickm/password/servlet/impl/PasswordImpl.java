@@ -23,17 +23,20 @@
 package com.pragmatickm.password.servlet.impl;
 
 import com.aoindustries.encoding.MediaWriter;
+import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.encodeTextInXhtml;
 import com.pragmatickm.password.model.Password;
 import com.semanticcms.core.model.ElementContext;
 import com.semanticcms.core.servlet.PageIndex;
+import com.semanticcms.core.servlet.SemanticCMS;
 import java.io.IOException;
 import java.io.Writer;
 
 final public class PasswordImpl {
 
 	public static void writePassword(
+		SemanticCMS semanticCMS,
 		PageIndex pageIndex,
 		Writer out,
 		ElementContext context,
@@ -51,7 +54,13 @@ final public class PasswordImpl {
 			);
 			out.write('"');
 		}
-		out.write(" class=\"passwordIcon\">");
+		String linkCssClass = semanticCMS.getLinkCssClass(password);
+		if(linkCssClass != null) {
+			out.write(" class=\"");
+			encodeTextInXhtmlAttribute(linkCssClass, out);
+			out.write('"');
+		}
+		out.write('>');
 		encodeTextInXhtml(password.getPassword(), out);
 		out.write("</span>");
 	}

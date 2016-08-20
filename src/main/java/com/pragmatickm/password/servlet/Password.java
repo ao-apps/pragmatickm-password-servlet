@@ -106,9 +106,11 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 		return this;
 	}
 
+	private SemanticCMS semanticCMS;
 	private PageIndex pageIndex;
 	@Override
 	protected void doBody(CaptureLevel captureLevel, Body<? super com.pragmatickm.password.model.Password> body) throws ServletException, IOException, SkipPageException {
+		semanticCMS = SemanticCMS.getInstance(servletContext);
 		pageIndex = PageIndex.getCurrentPageIndex(request);
 		super.doBody(captureLevel, body);
 	}
@@ -116,7 +118,7 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 	@Override
 	public void writeTo(Writer out, ElementContext context) throws IOException, ServletException, SkipPageException {
 		if(!(element.getParentElement() instanceof PasswordTable)) {
-			PasswordImpl.writePassword(pageIndex, out, context, element);
+			PasswordImpl.writePassword(semanticCMS, pageIndex, out, context, element);
 		}
 	}
 }
