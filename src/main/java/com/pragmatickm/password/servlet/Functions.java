@@ -23,18 +23,26 @@
 package com.pragmatickm.password.servlet;
 
 import com.aoindustries.aoserv.client.PasswordGenerator;
+import com.semanticcms.core.servlet.CaptureLevel;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Random;
+import javax.servlet.ServletRequest;
 
 final public class Functions {
 
 	private static final int SHORT_PASSWORD_LENGTH = 8;
 
+	private static final String CAPTURING_CONSTANT = "<<<CAPTURING>>>";
+
 	private static final Random random = new SecureRandom();
 
-	public static String generatePassword() throws IOException {
-		return PasswordGenerator.generatePassword(random);
+	public static String generatePassword(ServletRequest request) throws IOException {
+		if(CaptureLevel.getCaptureLevel(request) != CaptureLevel.BODY) {
+			return CAPTURING_CONSTANT;
+		} else {
+			return PasswordGenerator.generatePassword(random);
+		}
 	}
 
 	public static String generateShortPassword() {
@@ -50,6 +58,14 @@ final public class Functions {
 			}
 		}
 		return sb.toString();
+	}
+
+	public static String generateShortPassword(ServletRequest request) {
+		if(CaptureLevel.getCaptureLevel(request) != CaptureLevel.BODY) {
+			return CAPTURING_CONSTANT;
+		} else {
+			return generateShortPassword();
+		}
 	}
 
 	/**
