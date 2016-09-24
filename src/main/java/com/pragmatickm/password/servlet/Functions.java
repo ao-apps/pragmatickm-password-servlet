@@ -26,7 +26,6 @@ import com.aoindustries.aoserv.client.PasswordGenerator;
 import com.semanticcms.core.servlet.CaptureLevel;
 import java.io.IOException;
 import java.security.SecureRandom;
-import java.util.Random;
 import javax.servlet.ServletRequest;
 
 final public class Functions {
@@ -35,13 +34,13 @@ final public class Functions {
 
 	private static final String CAPTURING_CONSTANT = "<<<CAPTURING>>>";
 
-	private static final Random random = new SecureRandom();
+	private static final SecureRandom secureRandom = new SecureRandom();
 
 	public static String generatePassword(ServletRequest request) throws IOException {
 		if(CaptureLevel.getCaptureLevel(request) != CaptureLevel.BODY) {
 			return CAPTURING_CONSTANT;
 		} else {
-			return PasswordGenerator.generatePassword(random);
+			return PasswordGenerator.generatePassword(secureRandom);
 		}
 	}
 
@@ -49,7 +48,7 @@ final public class Functions {
 		// Only use characters 0-9, A-Z, and a-z
 		StringBuilder sb = new StringBuilder(SHORT_PASSWORD_LENGTH);
 		for(int i=0; i<SHORT_PASSWORD_LENGTH; i++) {
-			int val = random.nextInt(10 + 26 + 26);
+			int val = secureRandom.nextInt(10 + 26 + 26);
 			if(val<10) sb.append(val);
 			else if(val < (10 + 26)) {
 				sb.append((char)(val - 10 + 'A'));
