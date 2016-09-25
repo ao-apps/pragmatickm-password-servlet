@@ -35,8 +35,6 @@ import com.semanticcms.core.servlet.Element;
 import com.semanticcms.core.servlet.PageContext;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -100,15 +98,14 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
 		return this;
 	}
 
-	private final List<com.pragmatickm.password.model.Password> passwords = new ArrayList<com.pragmatickm.password.model.Password>();
-	public PasswordTable passwords(Iterable<com.pragmatickm.password.model.Password> passwords) {
-		this.passwords.clear();
-		for(com.pragmatickm.password.model.Password password : passwords) this.passwords.add(password);
+	private Iterable<? extends com.pragmatickm.password.model.Password> passwords;
+	public PasswordTable passwords(Iterable<? extends com.pragmatickm.password.model.Password> passwords) {
+		this.passwords = passwords;
 		return this;
 	}
 
-	private String style;
-	public PasswordTable style(String style) {
+	private Object style;
+	public PasswordTable style(Object style) {
 		this.style = style;
 		return this;
 	}

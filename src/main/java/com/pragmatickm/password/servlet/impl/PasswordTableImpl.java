@@ -22,6 +22,7 @@
  */
 package com.pragmatickm.password.servlet.impl;
 
+import com.aoindustries.encoding.Coercion;
 import com.aoindustries.encoding.MediaWriter;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
@@ -64,13 +65,16 @@ final public class PasswordTableImpl {
 		HttpServletResponse response,
 		Writer out,
 		PasswordTable passwordTable,
-		List<Password> passwords,
-		String style
+		Iterable<? extends Password> passwords,
+		Object style
 	) throws IOException, ServletException {
 		SemanticCMS semanticCMS = SemanticCMS.getInstance(servletContext);
 		PageIndex pageIndex = PageIndex.getCurrentPageIndex(request);
-		// Combine attribute and body
-		List<Password> allPasswords = new ArrayList<Password>(passwords);
+		// Combine passwords from both attribute and body
+		List<Password> allPasswords = new ArrayList<Password>();
+		if(passwords != null) {
+			for(Password password : passwords) allPasswords.add(password);
+		}
 		for(Element childElement : passwordTable.getChildElements()) {
 			if(childElement instanceof Password) allPasswords.add((Password)childElement);
 		}
@@ -94,9 +98,9 @@ final public class PasswordTableImpl {
 		if(hasSecretQuestion) colCount += 2;
 		// Print the table
 		out.write("<table class=\"thinTable passwordTable\"");
-		if(style!=null) {
+		if(style != null) {
 			out.write(" style=\"");
-			encodeTextInXhtmlAttribute(style, out);
+			Coercion.write(style, textInXhtmlAttributeEncoder, out);
 			out.write('"');
 		}
 		out.write(">\n"
