@@ -106,7 +106,7 @@ final public class PasswordTableImpl {
 		out.write(">\n"
 				+ "<thead>\n");
 		final String header = passwordTable.getHeader();
-		if(header!=null && !header.isEmpty()) {
+		if(header != null) {
 			out.write("<tr>\n"
 					+ "<th class=\"passwordTableHeader\"");
 			if(colCount>1) {
