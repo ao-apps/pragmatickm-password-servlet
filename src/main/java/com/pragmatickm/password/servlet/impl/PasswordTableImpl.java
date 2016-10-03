@@ -223,6 +223,7 @@ final public class PasswordTableImpl {
 								final PageRef pageRef = value.getPageRef();
 								final String element = value.getElement();
 								if(pageRef != null) {
+									// TODO: Capture all the pages above in a batch, allows for concurrent capture
 									// Get the target page even when value is also provided to validate correct page linking
 									Page targetPage =
 										pageRef.getBook() == null
