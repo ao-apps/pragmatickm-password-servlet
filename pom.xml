@@ -84,6 +84,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 									<link>https://docs.oracle.com/javaee/6/api/</link>
 									<link>https://aoindustries.com/ao-encoding/apidocs/</link>
 									<link>https://aoindustries.com/ao-io-buffer/apidocs/</link>
+									<link>https://aoindustries.com/ao-lang/apidocs/</link>
 									<link>https://aoindustries.com/ao-servlet-filter/apidocs/</link>
 									<link>https://aoindustries.com/ao-taglib/apidocs/</link>
 									<link>https://aoindustries.com/aocode-public/apidocs/</link>
@@ -125,6 +126,11 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId>
+			<artifactId>ao-lang</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aoindustries</groupId>
 			<artifactId>ao-servlet-filter</artifactId>
 			<version>1.4.2</version>
 		</dependency>
@@ -136,7 +142,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 		<dependency>
 			<groupId>com.aoindustries</groupId>
 			<artifactId>aocode-public</artifactId>
-			<version>1.8.3</version>
+			<version>1.9.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId>
