@@ -147,7 +147,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 		<dependency>
 			<groupId>com.aoindustries</groupId>
 			<artifactId>aoserv-client</artifactId>
-			<version>1.80.0-SNAPSHOT</version>
+			<version>1.80.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.pragmatickm</groupId>
