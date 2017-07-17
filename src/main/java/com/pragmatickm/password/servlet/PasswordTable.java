@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-servlet - Passwords nested within SemanticCMS pages and elements in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -46,14 +46,39 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
 	public PasswordTable(
 		ServletContext servletContext,
 		HttpServletRequest request,
-		HttpServletResponse response
+		HttpServletResponse response,
+		com.pragmatickm.password.model.PasswordTable element
 	) {
 		super(
 			servletContext,
 			request,
 			response,
+			element
+		);
+	}
+
+	public PasswordTable(
+		ServletContext servletContext,
+		HttpServletRequest request,
+		HttpServletResponse response
+	) {
+		this(
+			servletContext,
+			request,
+			response,
 			new com.pragmatickm.password.model.PasswordTable()
 		);
+	}
+
+	public PasswordTable(
+		ServletContext servletContext,
+		HttpServletRequest request,
+		HttpServletResponse response,
+		com.pragmatickm.password.model.PasswordTable element,
+		String header
+	) {
+		this(servletContext, request, response, element);
+		element.setHeader(header);
 	}
 
 	public PasswordTable(
@@ -71,12 +96,37 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
 	 *
 	 * @see  PageContext
 	 */
+	public PasswordTable(com.pragmatickm.password.model.PasswordTable element) {
+		this(
+			PageContext.getServletContext(),
+			PageContext.getRequest(),
+			PageContext.getResponse(),
+			element
+		);
+	}
+
+	/**
+	 * Creates a new password table in the current page context.
+	 *
+	 * @see  PageContext
+	 */
 	public PasswordTable() {
 		this(
 			PageContext.getServletContext(),
 			PageContext.getRequest(),
 			PageContext.getResponse()
 		);
+	}
+
+	/**
+	 * @see  #PasswordTable(com.pragmatickm.password.model.PasswordTable)
+	 */
+	public PasswordTable(
+		com.pragmatickm.password.model.PasswordTable element,
+		String header
+	) {
+		this(element);
+		element.setHeader(header);
 	}
 
 	/**

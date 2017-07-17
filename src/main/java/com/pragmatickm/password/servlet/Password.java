@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-servlet - Passwords nested within SemanticCMS pages and elements in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -47,16 +47,50 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 		ServletContext servletContext,
 		HttpServletRequest request,
 		HttpServletResponse response,
+		com.pragmatickm.password.model.Password element,
 		String password
 	) {
 		super(
 			servletContext,
 			request,
 			response,
-			new com.pragmatickm.password.model.Password()
+			element
 		);
 		boolean demoMode = SemanticCMS.getInstance(servletContext).getDemoMode();
 		element.setPassword(demoMode ? DEMO_MODE_PASSWORD : password);
+	}
+
+	public Password(
+		ServletContext servletContext,
+		HttpServletRequest request,
+		HttpServletResponse response,
+		String password
+	) {
+		this(
+			servletContext,
+			request,
+			response,
+			new com.pragmatickm.password.model.Password(),
+			password
+		);
+	}
+
+	/**
+	 * Creates a new password in the current page context.
+	 *
+	 * @see  PageContext
+	 */
+	public Password(
+		com.pragmatickm.password.model.Password element,
+		String password
+	) {
+		this(
+			PageContext.getServletContext(),
+			PageContext.getRequest(),
+			PageContext.getResponse(),
+			element,
+			password
+		);
 	}
 
 	/**
