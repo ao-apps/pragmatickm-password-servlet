@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-servlet - Passwords nested within SemanticCMS pages and elements in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -32,10 +32,12 @@ import com.aoindustries.lang.ObjectUtils;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
+import com.semanticcms.core.model.BookRef;
 import com.semanticcms.core.model.Element;
 import com.semanticcms.core.model.NodeBodyWriter;
 import com.semanticcms.core.model.Page;
 import com.semanticcms.core.model.PageRef;
+import com.semanticcms.core.repository.Book;
 import com.semanticcms.core.servlet.CaptureLevel;
 import com.semanticcms.core.servlet.CapturePage;
 import com.semanticcms.core.servlet.PageIndex;
@@ -225,16 +227,19 @@ final public class PasswordTableImpl {
 								if(pageRef != null) {
 									// TODO: Capture all the pages above in a batch, allows for concurrent capture
 									// Get the target page even when value is also provided to validate correct page linking
+									BookRef bookRef = pageRef.getBookRef();
+									Book book = semanticCMS.getBooks().get(bookRef);
+									if(book == null) throw new ServletException("Book not found: " + bookRef);
 									Page targetPage =
-										pageRef.getBook() == null
-										? null
-										: CapturePage.capturePage(
+										book.isAccessible()
+										? CapturePage.capturePage(
 											servletContext,
 											request,
 											response,
 											pageRef,
 											element==null ? CaptureLevel.PAGE : CaptureLevel.META
 										)
+										: null
 									;
 									// Find the element
 									Element targetElement;
