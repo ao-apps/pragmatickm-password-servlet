@@ -32,6 +32,7 @@ import com.aoindustries.lang.ObjectUtils;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
+import com.semanticcms.core.model.BookRef;
 import com.semanticcms.core.model.Element;
 import com.semanticcms.core.model.NodeBodyWriter;
 import com.semanticcms.core.model.Page;
@@ -225,8 +226,9 @@ final public class PasswordTableImpl {
 								if(pageRef != null) {
 									// TODO: Capture all the pages above in a batch, allows for concurrent capture
 									// Get the target page even when value is also provided to validate correct page linking
+									final BookRef bookRef = pageRef.getBookRef();
 									Page targetPage =
-										semanticCMS.getBook(pageRef.getBookRef()).isAccessible()
+										semanticCMS.getBook(bookRef).isAccessible()
 										? CapturePage.capturePage(
 											servletContext,
 											request,
@@ -261,7 +263,7 @@ final public class PasswordTableImpl {
 											encodeTextInXhtmlAttribute(
 												response.encodeURL(
 													com.aoindustries.net.UrlUtils.encodeUrlPath(
-														request.getContextPath() + pageRef.getServletPath(),
+														request.getContextPath() + bookRef.getPrefix() + pageRef.getPath(),
 														responseEncoding
 													)
 												),
@@ -280,7 +282,7 @@ final public class PasswordTableImpl {
 											encodeTextInXhtmlAttribute(
 												response.encodeURL(
 													com.aoindustries.net.UrlUtils.encodeUrlPath(
-														request.getContextPath() + pageRef.getServletPath() + '#' + element,
+														request.getContextPath() + bookRef.getPrefix() + pageRef.getPath() + '#' + element,
 														responseEncoding
 													)
 												),
