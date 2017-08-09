@@ -22,11 +22,8 @@
  */
 package com.pragmatickm.password.servlet;
 
-import com.aoindustries.io.TempFileList;
-import com.aoindustries.io.buffer.AutoTempFileWriter;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
-import com.aoindustries.servlet.filter.TempFileContext;
 import com.aoindustries.taglib.AutoEncodingBufferedTag;
 import com.pragmatickm.password.servlet.impl.PasswordTableImpl;
 import com.semanticcms.core.model.ElementContext;
@@ -165,18 +162,7 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
 	protected void doBody(CaptureLevel captureLevel, Body<? super com.pragmatickm.password.model.PasswordTable> body) throws ServletException, IOException, SkipPageException {
 		super.doBody(captureLevel, body);
 		if(captureLevel == CaptureLevel.BODY) {
-			// Enable temp files if temp file context active
-			BufferWriter capturedOut = TempFileContext.wrapTempFileList(
-				AutoEncodingBufferedTag.newBufferWriter(),
-				request,
-				// Java 1.8: AutoTempFileWriter::new
-				new TempFileContext.Wrapper<BufferWriter>() {
-					@Override
-					public BufferWriter call(BufferWriter original, TempFileList tempFileList) {
-						return new AutoTempFileWriter(original, tempFileList);
-					}
-				}
-			);
+			BufferWriter capturedOut = AutoEncodingBufferedTag.newBufferWriter(request);
 			try {
 				PasswordTableImpl.writePasswordTable(
 					servletContext,
