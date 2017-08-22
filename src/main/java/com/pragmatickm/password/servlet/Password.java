@@ -26,7 +26,7 @@ import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.servlet.impl.PasswordImpl;
 import com.semanticcms.core.model.ElementContext;
 import com.semanticcms.core.model.PageRef;
-import com.semanticcms.core.servlet.CaptureLevel;
+import com.semanticcms.core.pages.CaptureLevel;
 import com.semanticcms.core.servlet.Element;
 import com.semanticcms.core.servlet.PageContext;
 import com.semanticcms.core.servlet.PageIndex;

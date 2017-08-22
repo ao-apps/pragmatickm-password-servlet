@@ -27,7 +27,7 @@ import com.aoindustries.io.buffer.BufferWriter;
 import com.aoindustries.taglib.AutoEncodingBufferedTag;
 import com.pragmatickm.password.servlet.impl.PasswordTableImpl;
 import com.semanticcms.core.model.ElementContext;
-import com.semanticcms.core.servlet.CaptureLevel;
+import com.semanticcms.core.pages.CaptureLevel;
 import com.semanticcms.core.servlet.Element;
 import com.semanticcms.core.servlet.PageContext;
 import java.io.IOException;
