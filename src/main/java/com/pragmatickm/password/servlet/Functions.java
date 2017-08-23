@@ -24,7 +24,7 @@ package com.pragmatickm.password.servlet;
 
 import com.aoindustries.aoserv.client.PasswordGenerator;
 import com.semanticcms.core.pages.CaptureLevel;
-import com.semanticcms.core.servlet.CurrentCaptureLevel;
+import com.semanticcms.core.pages.local.CurrentCaptureLevel;
 import java.io.IOException;
 import java.security.SecureRandom;
 import javax.servlet.ServletRequest;
