@@ -25,7 +25,7 @@ package com.pragmatickm.password.servlet;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
 import com.aoindustries.taglib.AutoEncodingBufferedTag;
-import com.pragmatickm.password.servlet.impl.PasswordTableImpl;
+import com.pragmatickm.password.renderer.html.PasswordTableHtmlRenderer;
 import com.semanticcms.core.model.ElementContext;
 import com.semanticcms.core.pages.CaptureLevel;
 import com.semanticcms.core.pages.local.PageContext;
@@ -164,7 +164,7 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
 		if(captureLevel == CaptureLevel.BODY) {
 			BufferWriter capturedOut = AutoEncodingBufferedTag.newBufferWriter(request);
 			try {
-				PasswordTableImpl.writePasswordTable(
+				PasswordTableHtmlRenderer.writePasswordTable(
 					servletContext,
 					request,
 					response,

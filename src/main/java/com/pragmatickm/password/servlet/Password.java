@@ -23,14 +23,15 @@
 package com.pragmatickm.password.servlet;
 
 import com.pragmatickm.password.model.PasswordTable;
-import com.pragmatickm.password.servlet.impl.PasswordImpl;
+import com.pragmatickm.password.renderer.html.PasswordHtmlRenderer;
+import com.semanticcms.core.controller.SemanticCMS;
 import com.semanticcms.core.model.ElementContext;
 import com.semanticcms.core.model.PageRef;
 import com.semanticcms.core.pages.CaptureLevel;
 import com.semanticcms.core.pages.local.PageContext;
+import com.semanticcms.core.renderer.html.HtmlRenderer;
+import com.semanticcms.core.renderer.html.PageIndex;
 import com.semanticcms.core.servlet.Element;
-import com.semanticcms.core.servlet.PageIndex;
-import com.semanticcms.core.servlet.SemanticCMS;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.ServletContext;
@@ -140,11 +141,11 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 		return this;
 	}
 
-	private SemanticCMS semanticCMS;
+	private HtmlRenderer htmlRenderer;
 	private PageIndex pageIndex;
 	@Override
 	protected void doBody(CaptureLevel captureLevel, Body<? super com.pragmatickm.password.model.Password> body) throws ServletException, IOException, SkipPageException {
-		semanticCMS = SemanticCMS.getInstance(servletContext);
+		htmlRenderer = HtmlRenderer.getInstance(servletContext);
 		pageIndex = PageIndex.getCurrentPageIndex(request);
 		super.doBody(captureLevel, body);
 	}
@@ -152,7 +153,7 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 	@Override
 	public void writeTo(Writer out, ElementContext context) throws IOException, ServletException, SkipPageException {
 		if(!(element.getParentElement() instanceof PasswordTable)) {
-			PasswordImpl.writePassword(semanticCMS, pageIndex, out, context, element);
+			PasswordHtmlRenderer.writePassword(htmlRenderer, pageIndex, out, context, element);
 		}
 	}
 }
