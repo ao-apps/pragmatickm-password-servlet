@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-servlet - Passwords nested within SemanticCMS pages and elements in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,7 +22,7 @@
  */
 package com.pragmatickm.password.servlet;
 
-import com.aoindustries.aoserv.client.PasswordGenerator;
+import com.aoindustries.aoserv.client.password.PasswordGenerator;
 import com.semanticcms.core.pages.CaptureLevel;
 import com.semanticcms.core.pages.local.CurrentCaptureLevel;
 import java.io.IOException;
