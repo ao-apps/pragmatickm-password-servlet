@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 pragmatickm-password-servlet - Passwords nested within SemanticCMS pages and elements in a Servlet environment.
-Copyright (C) 2017, 2018  AO Industries, Inc.
+Copyright (C) 2017, 2018, 2019  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -37,7 +37,7 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 		<documented.groupId>com.pragmatickm</documented.groupId><documented.artifactId>pragmatickm-password-servlet</documented.artifactId>
 		<documented.javaVersion>1.6</documented.javaVersion>
 		<documented.javac.link.javaApi>${javac.link.javaApi.jdk16}</documented.javac.link.javaApi>
-		<documented.name>PragmaticKM Password Servlet</documented.name>
+		<documented.name>PragmaticKM 2 Password Servlet</documented.name>
 		<documented.shortTitle>Servlet</documented.shortTitle>
 		<documented.url>https://pragmatickm.com/password/servlet/</documented.url>
 		<documented.description>Passwords nested within SemanticCMS pages and elements in a Servlet environment.</documented.description>
