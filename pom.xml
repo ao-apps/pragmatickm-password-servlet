@@ -40,7 +40,7 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 		<description.html><![CDATA[Passwords nested within <a target="_top" href="https://semanticcms.com/">SemanticCMS</a> pages and elements in a Servlet environment.]]></description.html>
 	</properties>
 
-	<name>PragmaticKM 1 Password Servlet</name>
+	<name>PragmaticKM Password Servlet</name>
 	<url>https://pragmatickm.com/password/servlet/</url>
 	<description>Passwords nested within SemanticCMS pages and elements in a Servlet environment.</description>
 	<inceptionYear>2013</inceptionYear>
