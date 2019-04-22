@@ -37,7 +37,7 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2017-07-25T18:14:05-0500"
-		dateModified="2017-07-27T00:09:03-0500"
+		dateModified="2019-04-22T01:31:17-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.pragmatickm:pragmatickm-password-servlet:pom.version}" />
@@ -52,7 +52,12 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 				groupId="@{documented.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{documented.scm.url}"
-			/>
+			>
+				<ul>
+					<li>Minimum Java version changed from 1.6 to 1.7.</li>
+					<li>Updated dependencies.</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release
