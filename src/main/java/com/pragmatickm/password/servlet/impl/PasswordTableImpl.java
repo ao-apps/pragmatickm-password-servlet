@@ -28,6 +28,8 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.encodeTextInXhtml;
 import com.aoindustries.io.buffer.BufferResult;
+import com.aoindustries.servlet.ServletUtil;
+import com.aoindustries.servlet.URIComponent;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
@@ -79,7 +81,6 @@ final public class PasswordTableImpl {
 			if(childElement instanceof Password) allPasswords.add((Password)childElement);
 		}
 
-		final String responseEncoding = response.getCharacterEncoding();
 		// Find which columns need to be displayed
 		boolean hasHref = false;
 		Set<String> uniqueCustomFields = new LinkedHashSet<>();
@@ -252,17 +253,21 @@ final public class PasswordTableImpl {
 									if(element == null) {
 										if(index != null) {
 											out.write('#');
-											PageIndex.appendIdInPage(
-												index,
-												null,
-												new MediaWriter(textInXhtmlAttributeEncoder, out)
+											URIComponent.FRAGMENT.encode(
+												PageIndex.getRefId(
+													index,
+													null
+												),
+												response,
+												out,
+												textInXhtmlAttributeEncoder
 											);
 										} else {
 											encodeTextInXhtmlAttribute(
 												response.encodeURL(
-													com.aoindustries.net.UrlUtils.encodeUrlPath(
+													ServletUtil.encodeURI(
 														request.getContextPath() + pageRef.getServletPath(),
-														responseEncoding
+														response
 													)
 												),
 												out
@@ -271,17 +276,24 @@ final public class PasswordTableImpl {
 									} else {
 										if(index != null) {
 											out.write('#');
-											PageIndex.appendIdInPage(
-												index,
-												element,
-												new MediaWriter(textInXhtmlAttributeEncoder, out)
+											URIComponent.FRAGMENT.encode(
+												PageIndex.getRefId(
+													index,
+													element
+												),
+												response,
+												out,
+												textInXhtmlAttributeEncoder
 											);
 										} else {
 											encodeTextInXhtmlAttribute(
 												response.encodeURL(
-													com.aoindustries.net.UrlUtils.encodeUrlPath(
-														request.getContextPath() + pageRef.getServletPath() + '#' + element,
-														responseEncoding
+													ServletUtil.encodeURI(
+														request.getContextPath()
+														+ pageRef.getServletPath()
+														+ '#'
+														+ URIComponent.FRAGMENT.encode(element, response),
+														response
 													)
 												),
 												out
