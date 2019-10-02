@@ -28,8 +28,7 @@ import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextIn
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
 import static com.aoindustries.encoding.TextInXhtmlEncoder.encodeTextInXhtml;
 import com.aoindustries.io.buffer.BufferResult;
-import com.aoindustries.servlet.ServletUtil;
-import com.aoindustries.servlet.URIComponent;
+import com.aoindustries.net.URIEncoder;
 import com.aoindustries.servlet.http.LastModifiedServlet;
 import com.pragmatickm.password.model.Password;
 import com.pragmatickm.password.model.PasswordTable;
@@ -253,21 +252,19 @@ final public class PasswordTableImpl {
 									if(element == null) {
 										if(index != null) {
 											out.write('#');
-											URIComponent.FRAGMENT.encode(
+											URIEncoder.encodeURIComponent(
 												PageIndex.getRefId(
 													index,
 													null
 												),
-												response,
 												out,
 												textInXhtmlAttributeEncoder
 											);
 										} else {
 											encodeTextInXhtmlAttribute(
 												response.encodeURL(
-													ServletUtil.encodeURI(
-														request.getContextPath() + pageRef.getServletPath(),
-														response
+													URIEncoder.encodeURI(
+														request.getContextPath() + pageRef.getServletPath()
 													)
 												),
 												out
@@ -276,24 +273,22 @@ final public class PasswordTableImpl {
 									} else {
 										if(index != null) {
 											out.write('#');
-											URIComponent.FRAGMENT.encode(
+											URIEncoder.encodeURIComponent(
 												PageIndex.getRefId(
 													index,
 													element
 												),
-												response,
 												out,
 												textInXhtmlAttributeEncoder
 											);
 										} else {
 											encodeTextInXhtmlAttribute(
 												response.encodeURL(
-													ServletUtil.encodeURI(
+													URIEncoder.encodeURI(
 														request.getContextPath()
 														+ pageRef.getServletPath()
 														+ '#'
-														+ URIComponent.FRAGMENT.encode(element, response),
-														response
+														+ URIEncoder.encodeURIComponent(element)
 													)
 												),
 												out
