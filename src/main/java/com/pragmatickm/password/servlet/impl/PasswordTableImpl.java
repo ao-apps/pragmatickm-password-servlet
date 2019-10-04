@@ -257,8 +257,8 @@ final public class PasswordTableImpl {
 													index,
 													null
 												),
-												out,
-												textInXhtmlAttributeEncoder
+												textInXhtmlAttributeEncoder,
+												out
 											);
 										} else {
 											encodeTextInXhtmlAttribute(
@@ -278,8 +278,8 @@ final public class PasswordTableImpl {
 													index,
 													element
 												),
-												out,
-												textInXhtmlAttributeEncoder
+												textInXhtmlAttributeEncoder,
+												out
 											);
 										} else {
 											encodeTextInXhtmlAttribute(
