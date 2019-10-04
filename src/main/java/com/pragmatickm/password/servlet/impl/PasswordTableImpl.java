@@ -249,52 +249,44 @@ final public class PasswordTableImpl {
 									Integer index = pageIndex==null ? null : pageIndex.getPageIndex(pageRef);
 
 									out.write("<a href=\"");
+									StringBuilder href = new StringBuilder();
 									if(element == null) {
 										if(index != null) {
-											out.write('#');
+											href.append('#');
 											URIEncoder.encodeURIComponent(
 												PageIndex.getRefId(
 													index,
 													null
 												),
-												textInXhtmlAttributeEncoder,
-												out
+												href
 											);
 										} else {
-											encodeTextInXhtmlAttribute(
-												response.encodeURL(
-													URIEncoder.encodeURI(
-														request.getContextPath() + pageRef.getServletPath()
-													)
-												),
-												out
-											);
+											URIEncoder.encodeURI(request.getContextPath(), href);
+											URIEncoder.encodeURI(pageRef.getServletPath(), href);
 										}
 									} else {
 										if(index != null) {
-											out.write('#');
+											href.append('#');
 											URIEncoder.encodeURIComponent(
 												PageIndex.getRefId(
 													index,
 													element
 												),
-												textInXhtmlAttributeEncoder,
-												out
+												href
 											);
 										} else {
-											encodeTextInXhtmlAttribute(
-												response.encodeURL(
-													URIEncoder.encodeURI(
-														request.getContextPath()
-														+ pageRef.getServletPath()
-														+ '#'
-														+ URIEncoder.encodeURIComponent(element)
-													)
-												),
-												out
-											);
+											URIEncoder.encodeURI(request.getContextPath(), href);
+											URIEncoder.encodeURI(pageRef.getServletPath(), href);
+											href.append('#');
+											URIEncoder.encodeURIComponent(element, href);
 										}
 									}
+									encodeTextInXhtmlAttribute(
+										response.encodeURL(
+											href.toString()
+										),
+										out
+									);
 									out.write('"');
 									if(targetElement != null) {
 										String linkCssClass = semanticCMS.getLinkCssClass(targetElement);
