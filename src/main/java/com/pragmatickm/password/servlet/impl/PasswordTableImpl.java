@@ -95,7 +95,7 @@ final public class PasswordTableImpl {
 		if(hasUsername) colCount++;
 		if(hasSecretQuestion) colCount += 2;
 		// Print the table
-		html.out.write("<table class=\"thinTable passwordTable\"");
+		html.out.write("<table class=\"ao-grid passwordTable\"");
 		if(style != null) {
 			html.out.write(" style=\"");
 			Coercion.write(style, textInXhtmlAttributeEncoder, html.out);
