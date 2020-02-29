@@ -95,7 +95,7 @@ final public class PasswordTableImpl {
 		if(hasUsername) colCount++;
 		if(hasSecretQuestion) colCount += 2;
 		// Print the table
-		html.out.write("<table class=\"ao-grid passwordTable\"");
+		html.out.write("<table class=\"ao-grid pragmatickm-password\"");
 		if(style != null) {
 			html.out.write(" style=\"");
 			Coercion.write(style, textInXhtmlAttributeEncoder, html.out);
@@ -106,7 +106,7 @@ final public class PasswordTableImpl {
 		final String header = passwordTable.getHeader();
 		if(header != null) {
 			html.out.write("<tr>\n"
-				+ "<th class=\"passwordTableHeader\"");
+				+ "<th class=\"pragmatickm-password-header\"");
 			if(colCount>1) {
 				html.out.write(" colspan=\"");
 				encodeTextInXhtmlAttribute(Integer.toString(colCount), html.out);
@@ -382,7 +382,7 @@ final public class PasswordTableImpl {
 		}
 		BufferResult body = passwordTable.getBody();
 		if(body.getLength() > 0) {
-			html.out.write("<tr><td class=\"passwordTableBody\"");
+			html.out.write("<tr><td class=\"pragmatickm-password-body\"");
 			if(colCount>1) {
 				html.out.write(" colspan=\"");
 				encodeTextInXhtmlAttribute(Integer.toString(colCount), html.out);
