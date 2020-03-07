@@ -170,7 +170,7 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 					and <code><ao:a href="https://semanticcms.com/core/servlet/apidocs/com/semanticcms/core/servlet/CaptureLevel.html#META">META</ao:a></code>
 					captures.
 				</li>
-				<li>More explicit that this is a <ao:a href="@{documented.javac.link.javaApi}java/security/SecureRandom.html">SecureRandom</ao:a>.</li>
+				<li>More explicit that this is a <ao:a href="@{documented.javadoc.link.javase}java/security/SecureRandom.html">SecureRandom</ao:a>.</li>
 				<li>Deferred expressions for more attributes.</li>
 				<li>Removed buffer and autoFlush settings from JSPs; using defaults.</li>
 			</ul>
