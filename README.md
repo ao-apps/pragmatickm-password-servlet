@@ -30,7 +30,7 @@ Passwords nested within [SemanticCMS](https://github.com/aoindustries/semanticcm
 * [Project Home](https://pragmatickm.com/password/servlet/)
 * [Changelog](https://pragmatickm.com/password/servlet/changelog)
 * [API Docs](https://pragmatickm.com/password/servlet/apidocs/)
-* [Maven Central Repository](https://search.maven.org/#search%7Cgav%7C1%7Cg:%22com.pragmatickm%22%20AND%20a:%22pragmatickm-password-servlet%22)
+* [Maven Central Repository](https://search.maven.org/artifact/com.pragmatickm/pragmatickm-password-servlet)
 * [GitHub](https://github.com/aoindustries/pragmatickm-password-servlet)
 
 ## Contact Us
