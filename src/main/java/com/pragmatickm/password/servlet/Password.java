@@ -157,7 +157,7 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 			PasswordHtmlRenderer.writePassword(
 				htmlRenderer,
 				pageIndex,
-				HtmlEE.get(servletContext, request, out),
+				HtmlEE.get(servletContext, request, response, out),
 				context,
 				element
 			);
