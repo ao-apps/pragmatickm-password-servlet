@@ -353,7 +353,7 @@ final public class PasswordTableImpl {
 								pageIndex,
 								currentPage,
 								id,
-								new MediaWriter(textInXhtmlAttributeEncoder, html.out)
+								new MediaWriter(html.encodingContext, textInXhtmlAttributeEncoder, html.out)
 							);
 							html.out.write('"');
 						}
