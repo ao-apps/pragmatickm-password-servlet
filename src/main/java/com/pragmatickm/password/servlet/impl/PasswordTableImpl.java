@@ -41,7 +41,6 @@ import com.semanticcms.core.servlet.PageIndex;
 import com.semanticcms.core.servlet.SemanticCMS;
 import com.semanticcms.core.servlet.ServletElementContext;
 import com.semanticcms.core.servlet.impl.LinkImpl;
-import com.semanticcms.core.servlet.impl.UrlUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -177,7 +176,7 @@ final public class PasswordTableImpl {
 							html.out.write('>');
 							if(href!=null) {
 								html.out.write("<a");
-								UrlUtils.writeHref(request, response, html.out, href, null, false, false);
+								LinkImpl.writeHref(request, response, html.out, href, null, false, false);
 								html.out.write('>');
 								html.text(href);
 								html.out.write("</a>");
