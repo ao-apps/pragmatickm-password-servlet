@@ -116,7 +116,7 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 				<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>5.0.1${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>aoserv-client</artifactId><version>1.84.2${POST-SNAPSHOT}</version>
+				<groupId>com.aoindustries</groupId><artifactId>aoserv-client</artifactId><version>1.84.5-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
 			<dependency>
 				<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-password-model</artifactId><version>1.4.1${POST-SNAPSHOT}</version>
