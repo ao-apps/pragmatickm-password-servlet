@@ -71,7 +71,9 @@ final public class PasswordTableImpl {
 		// Combine passwords from both attribute and body
 		List<Password> allPasswords = new ArrayList<>();
 		if(passwords != null) {
-			for(Password password : passwords) allPasswords.add(password);
+			for(Password password : passwords) {
+				allPasswords.add(password);
+			}
 		}
 		for(Element childElement : passwordTable.getChildElements()) {
 			if(childElement instanceof Password) allPasswords.add((Password)childElement);
