@@ -29,7 +29,7 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 		<relativePath>../../parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-password-servlet</artifactId><version>1.6.0-POST-SNAPSHOT</version>
+	<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-password-servlet</artifactId><version>1.6.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<properties>

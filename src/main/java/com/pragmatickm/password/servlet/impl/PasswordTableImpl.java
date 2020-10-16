@@ -96,7 +96,19 @@ final public class PasswordTableImpl {
 		if(hasUsername) colCount++;
 		if(hasSecretQuestion) colCount += 2;
 		// Print the table
-		html.out.write("<table class=\"ao-grid pragmatickm-password\"");
+		html.out.write("<table");
+		String id = passwordTable.getId();
+		if(id != null) {
+			html.out.write(" id=\"");
+			PageIndex.appendIdInPage(
+				pageIndex,
+				passwordTable.getPage(),
+				id,
+				new MediaWriter(html.encodingContext, textInXhtmlAttributeEncoder, html.out)
+			);
+			html.out.write('"');
+		}
+		html.out.write(" class=\"ao-grid pragmatickm-password\"");
 		if(style != null) {
 			html.out.write(" style=\"");
 			Coercion.write(style, textInXhtmlAttributeEncoder, html.out);
@@ -345,19 +357,16 @@ final public class PasswordTableImpl {
 						html.out.write('"');
 					}
 					html.out.write("><span");
-					String id = password.getId();
+					id = password.getId();
 					if(id != null) {
-						final Page currentPage = passwordTable.getPage();
-						if(currentPage != null) {
-							html.out.write(" id=\"");
-							PageIndex.appendIdInPage(
-								pageIndex,
-								currentPage,
-								id,
-								new MediaWriter(html.encodingContext, textInXhtmlAttributeEncoder, html.out)
-							);
-							html.out.write('"');
-						}
+						html.out.write(" id=\"");
+						PageIndex.appendIdInPage(
+							pageIndex,
+							passwordTable.getPage(),
+							id,
+							new MediaWriter(html.encodingContext, textInXhtmlAttributeEncoder, html.out)
+						);
+						html.out.write('"');
 					}
 					String linkCssClass = semanticCMS.getLinkCssClass(password);
 					if(linkCssClass != null) {
