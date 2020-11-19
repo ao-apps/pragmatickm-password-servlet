@@ -22,10 +22,10 @@
  */
 package com.pragmatickm.password.servlet;
 
+import com.aoindustries.encoding.taglib.EncodingBufferedSimpleTag;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
-import com.aoindustries.taglib.AutoEncodingBufferedTag;
 import com.pragmatickm.password.renderer.html.PasswordTableHtmlRenderer;
 import com.semanticcms.core.model.ElementContext;
 import com.semanticcms.core.pages.CaptureLevel;
@@ -163,7 +163,7 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
 	protected void doBody(CaptureLevel captureLevel, Body<? super com.pragmatickm.password.model.PasswordTable> body) throws ServletException, IOException, SkipPageException {
 		super.doBody(captureLevel, body);
 		if(captureLevel == CaptureLevel.BODY) {
-			BufferWriter capturedOut = AutoEncodingBufferedTag.newBufferWriter(request);
+			BufferWriter capturedOut = EncodingBufferedSimpleTag.newBufferWriter(request);
 			try {
 				PasswordTableHtmlRenderer.writePasswordTable(
 					servletContext,

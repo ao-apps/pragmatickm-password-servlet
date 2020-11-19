@@ -71,6 +71,11 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 									<artifactItems>
 										<!-- Direct -->
 										<artifactItem>
+											<groupId>com.aoindustries</groupId><artifactId>ao-encoding-taglib</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-encoding-taglib</outputDirectory>
+										</artifactItem>
+										<artifactItem>
 											<groupId>com.aoindustries</groupId><artifactId>ao-fluent-html-servlet</artifactId>
 											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-fluent-html-servlet</outputDirectory>
@@ -79,11 +84,6 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 											<groupId>com.aoindustries</groupId><artifactId>ao-io-buffer</artifactId>
 											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-io-buffer</outputDirectory>
-										</artifactItem>
-										<artifactItem>
-											<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId>
-											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
-											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-taglib</outputDirectory>
 										</artifactItem>
 										<artifactItem>
 											<groupId>com.aoindustries</groupId><artifactId>aoserv-client</artifactId>
@@ -143,16 +143,16 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 							<offlineLinks>
 								<!-- Direct -->
 								<offlineLink>
+									<url>https://aoindustries.com/ao-encoding/taglib/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-encoding-taglib</location>
+								</offlineLink>
+								<offlineLink>
 									<url>https://aoindustries.com/ao-fluent-html/servlet/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-fluent-html-servlet</location>
 								</offlineLink>
 								<offlineLink>
 									<url>https://aoindustries.com/ao-io-buffer/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-io-buffer</location>
-								</offlineLink>
-								<offlineLink>
-									<url>https://aoindustries.com/ao-taglib/apidocs/</url>
-									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-taglib</location>
 								</offlineLink>
 								<offlineLink>
 									<url>https://aoindustries.com/aoserv/client/apidocs/</url>
@@ -214,13 +214,13 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 		<dependencies>
 			<!-- Direct -->
 			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-encoding-taglib</artifactId><version>1.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+			</dependency>
+			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-fluent-html-servlet</artifactId><version>0.1.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-io-buffer</artifactId><version>3.3.0${POST-SNAPSHOT}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>6.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>aoserv-client</artifactId><version>1.84.12-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
@@ -286,6 +286,12 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 				<groupId>com.aoindustries</groupId><artifactId>ao-servlet-util</artifactId><version>2.2.1${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-sql</artifactId><version>0.1.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+			</dependency>
+			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId><version>6.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+			</dependency>
+			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-tempfiles</artifactId><version>2.0.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
@@ -334,13 +340,13 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 	<dependencies>
 		<!-- Direct -->
 		<dependency>
+			<groupId>com.aoindustries</groupId><artifactId>ao-encoding-taglib</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-fluent-html-servlet</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-io-buffer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.aoindustries</groupId><artifactId>ao-taglib</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>aoserv-client</artifactId>
