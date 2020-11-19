@@ -37,7 +37,7 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2017-07-25T18:14:05-0500"
-		dateModified="2020-10-15T21:58:05-05:00"
+		dateModified="2020-11-18T21:36:34-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.pragmatickm:pragmatickm-password-servlet:pom.version}" />
@@ -55,6 +55,7 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 			>
 				<ul>
 					<li>Added missing id attribute to generated HTML.</li>
+					<li>Updated dependencies.</li>
 				</ul>
 			</changelog:release>
 		</c:if>
