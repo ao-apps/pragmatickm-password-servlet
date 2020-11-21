@@ -22,7 +22,7 @@
  */
 package com.pragmatickm.password.servlet;
 
-import com.aoindustries.encoding.taglib.EncodingBufferedSimpleTag;
+import com.aoindustries.encoding.taglib.EncodingBufferedTag;
 import com.aoindustries.html.servlet.HtmlEE;
 import com.aoindustries.io.buffer.BufferResult;
 import com.aoindustries.io.buffer.BufferWriter;
@@ -163,7 +163,7 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
 	protected void doBody(CaptureLevel captureLevel, Body<? super com.pragmatickm.password.model.PasswordTable> body) throws ServletException, IOException, SkipPageException {
 		super.doBody(captureLevel, body);
 		if(captureLevel == CaptureLevel.BODY) {
-			BufferWriter capturedOut = EncodingBufferedSimpleTag.newBufferWriter(request);
+			BufferWriter capturedOut = EncodingBufferedTag.newBufferWriter(request);
 			try {
 				PasswordTableImpl.writePasswordTable(
 					servletContext,
