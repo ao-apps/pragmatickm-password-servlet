@@ -29,7 +29,7 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 		<relativePath>../../parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-password-servlet</artifactId><version>1.7.0-SNAPSHOT</version>
+	<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-password-servlet</artifactId><version>1.7.0</version>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -49,7 +49,7 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 		<connection>scm:git:git://github.com/aoindustries/pragmatickm-password-servlet.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/pragmatickm-password-servlet.git</developerConnection>
 		<url>https://github.com/aoindustries/pragmatickm-password-servlet</url>
-		<tag>HEAD</tag>
+		<tag>pragmatickm-password-servlet-1.7.0</tag>
 	</scm>
 
 	<issueManagement>
