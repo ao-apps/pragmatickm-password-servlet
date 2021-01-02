@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-servlet - Passwords nested within SemanticCMS pages and elements in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -43,8 +43,6 @@ import javax.servlet.jsp.SkipPageException;
 
 public class Password extends Element<com.pragmatickm.password.model.Password> {
 
-	public static final String DEMO_MODE_PASSWORD = "********";
-
 	public Password(
 		ServletContext servletContext,
 		HttpServletRequest request,
@@ -59,7 +57,7 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 			element
 		);
 		boolean demoMode = SemanticCMS.getInstance(servletContext).getDemoMode();
-		element.setPassword(demoMode ? DEMO_MODE_PASSWORD : password);
+		element.setPassword(demoMode ? com.aoindustries.security.Password.MASKED_PASSWORD : password);
 	}
 
 	public Password(
@@ -138,7 +136,7 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 
 	public Password secretQuestion(String question, String answer) {
 		boolean demoMode = SemanticCMS.getInstance(servletContext).getDemoMode();
-		element.addSecretQuestion(question, demoMode ? DEMO_MODE_PASSWORD : answer);
+		element.addSecretQuestion(question, demoMode ? com.aoindustries.security.Password.MASKED_PASSWORD : answer);
 		return this;
 	}
 
