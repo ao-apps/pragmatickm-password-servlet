@@ -22,7 +22,7 @@
  */
 package com.pragmatickm.password.servlet;
 
-import com.aoindustries.html.servlet.HtmlEE;
+import com.aoindustries.html.servlet.DocumentEE;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.renderer.html.PasswordHtmlRenderer;
 import com.semanticcms.core.controller.SemanticCMS;
@@ -152,10 +152,9 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 	@Override
 	public void writeTo(Writer out, ElementContext context) throws IOException, ServletException, SkipPageException {
 		if(!(element.getParentElement() instanceof PasswordTable)) {
-			PasswordHtmlRenderer.writePassword(
-				htmlRenderer,
+			PasswordHtmlRenderer.writePassword(htmlRenderer,
 				pageIndex,
-				HtmlEE.get(servletContext, request, response, out),
+				DocumentEE.get(servletContext, request, response, out),
 				context,
 				element
 			);
