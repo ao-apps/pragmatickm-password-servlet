@@ -152,7 +152,8 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 	@Override
 	public void writeTo(Writer out, ElementContext context) throws IOException, ServletException, SkipPageException {
 		if(!(element.getParentElement() instanceof PasswordTable)) {
-			PasswordHtmlRenderer.writePassword(htmlRenderer,
+			PasswordHtmlRenderer.writePassword(
+				htmlRenderer,
 				pageIndex,
 				DocumentEE.get(servletContext, request, response, out),
 				context,

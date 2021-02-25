@@ -165,7 +165,8 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
 		if(captureLevel == CaptureLevel.BODY) {
 			BufferWriter capturedOut = EncodingBufferedTag.newBufferWriter(request);
 			try {
-				PasswordTableHtmlRenderer.writePasswordTable(servletContext,
+				PasswordTableHtmlRenderer.writePasswordTable(
+					servletContext,
 					request,
 					response,
 					DocumentEE.get(servletContext, request, response, capturedOut),
