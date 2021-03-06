@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-servlet - Passwords nested within SemanticCMS pages and elements in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,10 +22,7 @@
  */
 package com.pragmatickm.password.servlet.impl;
 
-import com.aoindustries.encoding.MediaWriter;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.textInXhtmlAttributeEncoder;
-import com.aoindustries.html.Document;
+import com.aoindustries.html.Union_Palpable_Phrasing;
 import com.pragmatickm.password.model.Password;
 import com.semanticcms.core.model.ElementContext;
 import com.semanticcms.core.servlet.PageIndex;
@@ -34,34 +31,23 @@ import java.io.IOException;
 
 final public class PasswordImpl {
 
-	public static void writePassword(
+	public static <__ extends Union_Palpable_Phrasing<__>> void writePassword(
 		SemanticCMS semanticCMS,
 		PageIndex pageIndex,
-		Document document,
+		__ content,
 		ElementContext context,
 		Password password
 	) throws IOException {
-		document.out.write("<span");
 		String id = password.getId();
-		if(id != null) {
-			document.out.write(" id=\"");
-			PageIndex.appendIdInPage(
+		content.span()
+			.id((id == null) ? null : idAttr -> PageIndex.appendIdInPage(
 				pageIndex,
 				password.getPage(),
 				id,
-				new MediaWriter(document.encodingContext, textInXhtmlAttributeEncoder, document.out)
-			);
-			document.out.write('"');
-		}
-		String linkCssClass = semanticCMS.getLinkCssClass(password);
-		if(linkCssClass != null) {
-			document.out.write(" class=\"");
-			encodeTextInXhtmlAttribute(linkCssClass, document.out);
-			document.out.write('"');
-		}
-		document.out.write('>');
-		document.text(password.getPassword());
-		document.out.write("</span>");
+				idAttr
+			))
+			.clazz(semanticCMS.getLinkCssClass(password))
+		.__(password.getPassword());
 	}
 
 	/**
