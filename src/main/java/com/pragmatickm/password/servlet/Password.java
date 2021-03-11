@@ -160,7 +160,7 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 			PasswordImpl.writePassword(
 				semanticCMS,
 				pageIndex,
-				DocumentEE.get(servletContext, request, response, out),
+				new DocumentEE(servletContext, request, response, out),
 				context,
 				element
 			);
