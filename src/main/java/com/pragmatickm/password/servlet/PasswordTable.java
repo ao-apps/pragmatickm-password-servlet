@@ -169,7 +169,7 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
 					servletContext,
 					request,
 					response,
-					DocumentEE.get(servletContext, request, response, capturedOut),
+					new DocumentEE(servletContext, request, response, capturedOut),
 					element,
 					passwords,
 					style
