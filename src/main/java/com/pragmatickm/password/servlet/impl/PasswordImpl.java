@@ -22,7 +22,6 @@
  */
 package com.pragmatickm.password.servlet.impl;
 
-import com.aoindustries.html.any.AnyDocument;
 import com.aoindustries.html.any.AnyUnion_Palpable_Phrasing;
 import com.pragmatickm.password.model.Password;
 import com.semanticcms.core.model.ElementContext;
@@ -32,13 +31,10 @@ import java.io.IOException;
 
 final public class PasswordImpl {
 
-	public static <
-		D extends AnyDocument<D>,
-		__ extends AnyUnion_Palpable_Phrasing<D, __>
-	> void writePassword(
+	public static void writePassword(
 		SemanticCMS semanticCMS,
 		PageIndex pageIndex,
-		__ content,
+		AnyUnion_Palpable_Phrasing<?, ?> content,
 		ElementContext context,
 		Password password
 	) throws IOException {

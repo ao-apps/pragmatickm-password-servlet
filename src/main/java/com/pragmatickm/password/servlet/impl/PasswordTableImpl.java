@@ -22,7 +22,6 @@
  */
 package com.pragmatickm.password.servlet.impl;
 
-import com.aoindustries.html.any.AnyDocument;
 import com.aoindustries.html.any.AnyPalpableContent;
 import com.aoindustries.html.any.AnyTABLE_c;
 import com.aoindustries.html.any.AnyTBODY_c;
@@ -60,14 +59,11 @@ import javax.servlet.http.HttpServletResponse;
 
 final public class PasswordTableImpl {
 
-	public static <
-		D extends AnyDocument<D>,
-		__ extends AnyPalpableContent<D, __>
-	> void writePasswordTable(
+	public static void writePasswordTable(
 		ServletContext servletContext,
 		HttpServletRequest request,
 		HttpServletResponse response,
-		__ content,
+		AnyPalpableContent<?, ?> content,
 		PasswordTable passwordTable,
 		Iterable<? extends Password> passwords,
 		Object style
@@ -104,7 +100,7 @@ final public class PasswordTableImpl {
 		// Print the table
 		String id = passwordTable.getId();
 		try (
-			AnyTABLE_c<D, __, ?> table = content.table()
+			AnyTABLE_c<?, ?, ?> table = content.table()
 				.id((id == null) ? null : idAttr -> PageIndex.appendIdInPage(
 					pageIndex,
 					passwordTable.getPage(),
@@ -115,18 +111,18 @@ final public class PasswordTableImpl {
 				.style(style)
 			._c()
 		) {
-			try (AnyTHEAD_c<D, ?, ?> thead = table.thead_c()) {
+			try (AnyTHEAD_c<?, ?, ?> thead = table.thead_c()) {
 				assert colCount >= 1;
 				final String header = passwordTable.getHeader();
 				if(header != null) {
-					try (AnyTR_c<D, ?, ?> tr = thead.tr_c()) {
+					try (AnyTR_c<?, ?, ?> tr = thead.tr_c()) {
 						tr.th().clazz("pragmatickm-password-header").colspan(colCount).__(th -> th
 							.div__(header)
 						);
 					}
 				}
 				if(colCount > 1) {
-					try (AnyTR_c<D, ?, ?> tr = thead.tr_c()) {
+					try (AnyTR_c<?, ?, ?> tr = thead.tr_c()) {
 						if(hasHref) {
 							tr.th__("Site");
 						}
@@ -144,7 +140,7 @@ final public class PasswordTableImpl {
 					}
 				}
 			}
-			try (AnyTBODY_c<D, ?, ?> tbody = table.tbody_c()) {
+			try (AnyTBODY_c<?, ?, ?> tbody = table.tbody_c()) {
 				// Group like custom values into rowspan
 				int hrefRowsLeft = 0;
 				Map<String, Integer> customValueRowsLeft = new HashMap<>();
@@ -154,7 +150,7 @@ final public class PasswordTableImpl {
 					int rowSpan = securityQuestions.isEmpty() ? 1 : securityQuestions.size();
 					Iterator<Map.Entry<String, String>> securityQuestionIter = securityQuestions.entrySet().iterator();
 					for(int row = 0; row < rowSpan; row++) {
-						try(AnyTR_c<D, ?, ?> tr = tbody.tr_c()) {
+						try(AnyTR_c<?, ?, ?> tr = tbody.tr_c()) {
 							if(row == 0) {
 								if(hasHref) {
 									if(hrefRowsLeft>0) {
@@ -175,7 +171,7 @@ final public class PasswordTableImpl {
 										}
 										int totalRowSpan = rowSpan + hrefRowsLeft;
 										assert totalRowSpan >= 1;
-										try (AnyTD_c<D, ?, ?> td = tr.td().rowspan(totalRowSpan)._c()) {
+										try (AnyTD_c<?, ?, ?> td = tr.td().rowspan(totalRowSpan)._c()) {
 											if(href != null) {
 												td.a(HttpServletUtil.buildURL(request, response, href, null, false, false)).__(href);
 											}
@@ -330,7 +326,7 @@ final public class PasswordTableImpl {
 				BufferResult body = passwordTable.getBody();
 				if(body.getLength() > 0) {
 					assert colCount >= 1;
-					try (AnyTR_c<D, ?, ?> tr = tbody.tr_c()) {
+					try (AnyTR_c<?, ?, ?> tr = tbody.tr_c()) {
 						tr.td().clazz("pragmatickm-password-body").colspan(colCount).__(td ->
 							body.writeTo(new NodeBodyWriter(passwordTable, td.getDocument().getUnsafe(), new ServletElementContext(servletContext, request, response)))
 						);
