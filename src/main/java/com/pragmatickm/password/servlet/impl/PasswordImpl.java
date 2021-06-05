@@ -22,7 +22,7 @@
  */
 package com.pragmatickm.password.servlet.impl;
 
-import com.aoindustries.html.any.AnyUnion_Palpable_Phrasing;
+import com.aoapps.html.any.AnyUnion_Palpable_Phrasing;
 import com.pragmatickm.password.model.Password;
 import com.semanticcms.core.model.ElementContext;
 import com.semanticcms.core.servlet.PageIndex;
