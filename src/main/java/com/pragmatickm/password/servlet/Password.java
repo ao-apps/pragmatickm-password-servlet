@@ -22,7 +22,7 @@
  */
 package com.pragmatickm.password.servlet;
 
-import com.aoindustries.html.servlet.DocumentEE;
+import com.aoapps.html.servlet.DocumentEE;
 import com.pragmatickm.password.model.PasswordTable;
 import com.pragmatickm.password.renderer.html.PasswordHtmlRenderer;
 import com.semanticcms.core.controller.SemanticCMS;
@@ -57,7 +57,7 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 			element
 		);
 		boolean demoMode = SemanticCMS.getInstance(servletContext).getDemoMode();
-		element.setPassword(demoMode ? com.aoindustries.security.Password.MASKED_PASSWORD : password);
+		element.setPassword(demoMode ? com.aoapps.security.Password.MASKED_PASSWORD : password);
 	}
 
 	public Password(
@@ -136,7 +136,7 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 
 	public Password secretQuestion(String question, String answer) {
 		boolean demoMode = SemanticCMS.getInstance(servletContext).getDemoMode();
-		element.addSecretQuestion(question, demoMode ? com.aoindustries.security.Password.MASKED_PASSWORD : answer);
+		element.addSecretQuestion(question, demoMode ? com.aoapps.security.Password.MASKED_PASSWORD : answer);
 		return this;
 	}
 
