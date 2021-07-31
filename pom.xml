@@ -216,7 +216,7 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
 						<configuration>
-							<offlineLinks>
+							<offlineLinks combine.children="append">
 								<!-- Direct -->
 								<offlineLink>
 									<url>https://oss.aoapps.com/encoding/apidocs/</url>
@@ -258,8 +258,8 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 									<url>https://aoindustries.com/aoserv/client/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.aoindustries/aoserv-client</location>
 								</offlineLink>
-								<!-- Java EE: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId> -->
-								<!-- Java EE: <groupId>javax.servlet.jsp</groupId><artifactId>javax.servlet.jsp-api</artifactId> -->
+								<!-- ao-javadoc-offline: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId> -->
+								<!-- ao-javadoc-offline: <groupId>javax.servlet.jsp</groupId><artifactId>javax.servlet.jsp-api</artifactId> -->
 								<offlineLink>
 									<url>https://pragmatickm.com/password/model/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.pragmatickm/pragmatickm-password-model</location>
@@ -271,16 +271,6 @@ along with pragmatickm-password-servlet.  If not, see <http://www.gnu.org/licens
 								<offlineLink>
 									<url>https://semanticcms.com/core/servlet/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-servlet</location>
-								</offlineLink>
-								<!-- Java SE -->
-								<offlineLink>
-									<url>${javadoc.link.javase}</url>
-									<location>${project.build.directory}/offlineLinks/com/aoapps/javadoc/offline/javase/${javase.release}</location>
-								</offlineLink>
-								<!-- Java EE -->
-								<offlineLink>
-									<url>${javadoc.link.javaee}</url>
-									<location>${project.build.directory}/offlineLinks/com/aoapps/javadoc/offline/javaee/${javaee.version}</location>
 								</offlineLink>
 							</offlineLinks>
 						</configuration>
