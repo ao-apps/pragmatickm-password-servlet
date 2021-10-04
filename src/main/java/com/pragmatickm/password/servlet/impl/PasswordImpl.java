@@ -29,7 +29,7 @@ import com.semanticcms.core.servlet.PageIndex;
 import com.semanticcms.core.servlet.SemanticCMS;
 import java.io.IOException;
 
-final public class PasswordImpl {
+public final class PasswordImpl {
 
 	public static void writePassword(
 		SemanticCMS semanticCMS,
