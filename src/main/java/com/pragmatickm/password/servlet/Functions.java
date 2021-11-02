@@ -34,6 +34,9 @@ public final class Functions {
 
 	private static final String CAPTURING_CONSTANT = "<<<CAPTURING>>>";
 
+	/**
+	 * Note: This is not a {@linkplain SecureRandom#getInstanceStrong() strong instance} to avoid blocking.
+	 */
 	private static final SecureRandom secureRandom = new SecureRandom();
 
 	public static String generatePassword(ServletRequest request) throws IOException {
