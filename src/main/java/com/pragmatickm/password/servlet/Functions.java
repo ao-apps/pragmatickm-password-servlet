@@ -29,7 +29,10 @@ import java.io.IOException;
 import java.security.SecureRandom;
 import javax.servlet.ServletRequest;
 
-public final class Functions {
+public abstract class Functions {
+
+	/** Make no instances. */
+	private Functions() {throw new AssertionError();}
 
 	private static final int SHORT_PASSWORD_LENGTH = 8;
 
@@ -69,11 +72,5 @@ public final class Functions {
 		} else {
 			return generateShortPassword();
 		}
-	}
-
-	/**
-	 * Make no instances.
-	 */
-	private Functions() {
 	}
 }
