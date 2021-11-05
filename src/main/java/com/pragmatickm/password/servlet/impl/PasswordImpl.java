@@ -29,7 +29,10 @@ import com.semanticcms.core.servlet.PageIndex;
 import com.semanticcms.core.servlet.SemanticCMS;
 import java.io.IOException;
 
-public final class PasswordImpl {
+public abstract class PasswordImpl {
+
+	/** Make no instances. */
+	private PasswordImpl() {throw new AssertionError();}
 
 	public static void writePassword(
 		SemanticCMS semanticCMS,
@@ -48,11 +51,5 @@ public final class PasswordImpl {
 			))
 			.clazz(semanticCMS.getLinkCssClass(password))
 		.__(password.getPassword());
-	}
-
-	/**
-	 * Make no instances.
-	 */
-	private PasswordImpl() {
 	}
 }

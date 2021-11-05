@@ -57,7 +57,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public final class PasswordTableImpl {
+public abstract class PasswordTableImpl {
+
+	/** Make no instances. */
+	private PasswordTableImpl() {throw new AssertionError();}
 
 	public static void writePasswordTable(
 		ServletContext servletContext,
@@ -334,11 +337,5 @@ public final class PasswordTableImpl {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Make no instances.
-	 */
-	private PasswordTableImpl() {
 	}
 }
