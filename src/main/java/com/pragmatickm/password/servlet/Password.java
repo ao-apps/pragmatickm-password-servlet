@@ -45,7 +45,7 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 	/**
 	 * @deprecated  Please use {@link com.aoapps.security.Password#MASKED_PASSWORD}
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static final String DEMO_MODE_PASSWORD = com.aoapps.security.Password.MASKED_PASSWORD;
 
 	public Password(
