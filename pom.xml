@@ -87,9 +87,15 @@ along with pragmatickm-password-servlet.  If not, see <https://www.gnu.org/licen
 	</issueManagement>
 
 	<ciManagement>
+		<system>Jenkins</system>
+		<url>https://jenkins.aoindustries.com/job/ao/job/pragmatickm-1.x/job/password/job/servlet/</url>
+	</ciManagement>
+	<!-- Only one allowed in POM:
+	<ciManagement>
 		<system>GitHub Actions</system>
 		<url>https://github.com/ao-apps/pragmatickm-password-servlet/actions</url>
 	</ciManagement>
+	-->
 
 	<repositories>
 		<!-- Repository required here, too, so can find parent -->
@@ -193,8 +199,8 @@ along with pragmatickm-password-servlet.  If not, see <https://www.gnu.org/licen
 											<includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/aoserv-client</outputDirectory>
 										</artifactItem>
-										<!-- ao-javadoc-offline: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId> -->
-										<!-- ao-javadoc-offline: <groupId>javax.servlet.jsp</groupId><artifactId>javax.servlet.jsp-api</artifactId> -->
+										<!-- ao-javadoc-offline: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId><classifier>javadoc</classifier> -->
+										<!-- ao-javadoc-offline: <groupId>javax.servlet.jsp</groupId><artifactId>javax.servlet.jsp-api</artifactId><classifier>javadoc</classifier> -->
 										<artifactItem>
 											<groupId>com.pragmatickm</groupId><artifactId>pragmatickm-password-model</artifactId><classifier>javadoc</classifier>
 											<includes>element-list, package-list</includes>
@@ -260,8 +266,8 @@ along with pragmatickm-password-servlet.  If not, see <https://www.gnu.org/licen
 									<url>https://aoindustries.com/aoserv/client/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.aoindustries/aoserv-client</location>
 								</offlineLink>
-								<!-- ao-javadoc-offline: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId> -->
-								<!-- ao-javadoc-offline: <groupId>javax.servlet.jsp</groupId><artifactId>javax.servlet.jsp-api</artifactId> -->
+								<!-- ao-javadoc-offline: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId><classifier>javadoc</classifier> -->
+								<!-- ao-javadoc-offline: <groupId>javax.servlet.jsp</groupId><artifactId>javax.servlet.jsp-api</artifactId><classifier>javadoc</classifier> -->
 								<offlineLink>
 									<url>https://pragmatickm.com/password/model/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.pragmatickm/pragmatickm-password-model</location>
