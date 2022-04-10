@@ -44,6 +44,7 @@ import com.semanticcms.core.servlet.SemanticCMS;
 import com.semanticcms.core.servlet.ServletElementContext;
 import com.semanticcms.core.servlet.impl.LinkImpl;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -330,9 +331,11 @@ public final class PasswordTableImpl {
 				if(body.getLength() > 0) {
 					assert colCount >= 1;
 					try (AnyTR_c<?, ?, ?> tr = tbody.tr_c()) {
-						tr.td().clazz("pragmatickm-password-body").colspan(colCount).__(td ->
-							body.writeTo(new NodeBodyWriter(passwordTable, td.getUnsafe(), new ServletElementContext(servletContext, request, response)))
-						);
+						tr.td().clazz("pragmatickm-password-body").colspan(colCount).__(td -> {
+							@SuppressWarnings("deprecation")
+							Writer unsafe = td.getRawUnsafe();
+							body.writeTo(new NodeBodyWriter(passwordTable, unsafe, new ServletElementContext(servletContext, request, response)));
+						});
 					}
 				}
 			}
