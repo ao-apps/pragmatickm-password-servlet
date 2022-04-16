@@ -20,6 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with pragmatickm-password-servlet.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 package com.pragmatickm.password.servlet.impl;
 
 import com.aoapps.html.any.AnyPalpableContent;
