@@ -32,46 +32,49 @@ import javax.servlet.ServletRequest;
 
 public final class Functions {
 
-	/** Make no instances. */
-	private Functions() {throw new AssertionError();}
+  /** Make no instances. */
+  private Functions() {
+    throw new AssertionError();
+  }
 
-	private static final int SHORT_PASSWORD_LENGTH = 8;
+  private static final int SHORT_PASSWORD_LENGTH = 8;
 
-	private static final String CAPTURING_CONSTANT = "<<<CAPTURING>>>";
+  private static final String CAPTURING_CONSTANT = "<<<CAPTURING>>>";
 
-	/**
-	 * Note: This is not a {@linkplain SecureRandom#getInstanceStrong() strong instance} to avoid blocking.
-	 */
-	private static final SecureRandom secureRandom = new SecureRandom();
+  /**
+   * Note: This is not a {@linkplain SecureRandom#getInstanceStrong() strong instance} to avoid blocking.
+   */
+  private static final SecureRandom secureRandom = new SecureRandom();
 
-	public static String generatePassword(ServletRequest request) throws IOException {
-		if(CurrentCaptureLevel.getCaptureLevel(request) != CaptureLevel.BODY) {
-			return CAPTURING_CONSTANT;
-		} else {
-			return PasswordGenerator.generatePassword(secureRandom);
-		}
-	}
+  public static String generatePassword(ServletRequest request) throws IOException {
+    if (CurrentCaptureLevel.getCaptureLevel(request) != CaptureLevel.BODY) {
+      return CAPTURING_CONSTANT;
+    } else {
+      return PasswordGenerator.generatePassword(secureRandom);
+    }
+  }
 
-	public static String generateShortPassword() {
-		// Only use characters 0-9, A-Z, and a-z
-		StringBuilder sb = new StringBuilder(SHORT_PASSWORD_LENGTH);
-		for(int i=0; i<SHORT_PASSWORD_LENGTH; i++) {
-			int val = secureRandom.nextInt(10 + 26 + 26);
-			if(val<10) sb.append(val);
-			else if(val < (10 + 26)) {
-				sb.append((char)(val - 10 + 'A'));
-			} else {
-				sb.append((char)(val - (10 + 26) + 'a'));
-			}
-		}
-		return sb.toString();
-	}
+  public static String generateShortPassword() {
+    // Only use characters 0-9, A-Z, and a-z
+    StringBuilder sb = new StringBuilder(SHORT_PASSWORD_LENGTH);
+    for (int i=0; i<SHORT_PASSWORD_LENGTH; i++) {
+      int val = secureRandom.nextInt(10 + 26 + 26);
+      if (val<10) {
+        sb.append(val);
+      } else if (val < (10 + 26)) {
+        sb.append((char)(val - 10 + 'A'));
+      } else {
+        sb.append((char)(val - (10 + 26) + 'a'));
+      }
+    }
+    return sb.toString();
+  }
 
-	public static String generateShortPassword(ServletRequest request) {
-		if(CurrentCaptureLevel.getCaptureLevel(request) != CaptureLevel.BODY) {
-			return CAPTURING_CONSTANT;
-		} else {
-			return generateShortPassword();
-		}
-	}
+  public static String generateShortPassword(ServletRequest request) {
+    if (CurrentCaptureLevel.getCaptureLevel(request) != CaptureLevel.BODY) {
+      return CAPTURING_CONSTANT;
+    } else {
+      return generateShortPassword();
+    }
+  }
 }
