@@ -43,128 +43,128 @@ import javax.servlet.jsp.SkipPageException;
 
 public class Password extends Element<com.pragmatickm.password.model.Password> {
 
-	/**
-	 * @deprecated  Please use {@link com.aoapps.security.Password#MASKED_PASSWORD}
-	 */
-	@Deprecated(forRemoval = true)
-	public static final String DEMO_MODE_PASSWORD = com.aoapps.security.Password.MASKED_PASSWORD;
+  /**
+   * @deprecated  Please use {@link com.aoapps.security.Password#MASKED_PASSWORD}
+   */
+  @Deprecated(forRemoval = true)
+  public static final String DEMO_MODE_PASSWORD = com.aoapps.security.Password.MASKED_PASSWORD;
 
-	public Password(
-		ServletContext servletContext,
-		HttpServletRequest request,
-		HttpServletResponse response,
-		com.pragmatickm.password.model.Password element,
-		String password
-	) {
-		super(
-			servletContext,
-			request,
-			response,
-			element
-		);
-		boolean demoMode = SemanticCMS.getInstance(servletContext).getDemoMode();
-		element.setPassword(demoMode ? com.aoapps.security.Password.MASKED_PASSWORD : password);
-	}
+  public Password(
+    ServletContext servletContext,
+    HttpServletRequest request,
+    HttpServletResponse response,
+    com.pragmatickm.password.model.Password element,
+    String password
+  ) {
+    super(
+      servletContext,
+      request,
+      response,
+      element
+    );
+    boolean demoMode = SemanticCMS.getInstance(servletContext).getDemoMode();
+    element.setPassword(demoMode ? com.aoapps.security.Password.MASKED_PASSWORD : password);
+  }
 
-	public Password(
-		ServletContext servletContext,
-		HttpServletRequest request,
-		HttpServletResponse response,
-		String password
-	) {
-		this(
-			servletContext,
-			request,
-			response,
-			new com.pragmatickm.password.model.Password(),
-			password
-		);
-	}
+  public Password(
+    ServletContext servletContext,
+    HttpServletRequest request,
+    HttpServletResponse response,
+    String password
+  ) {
+    this(
+      servletContext,
+      request,
+      response,
+      new com.pragmatickm.password.model.Password(),
+      password
+    );
+  }
 
-	/**
-	 * Creates a new password in the current page context.
-	 *
-	 * @see  PageContext
-	 */
-	public Password(
-		com.pragmatickm.password.model.Password element,
-		String password
-	) {
-		this(
-			PageContext.getServletContext(),
-			PageContext.getRequest(),
-			PageContext.getResponse(),
-			element,
-			password
-		);
-	}
+  /**
+   * Creates a new password in the current page context.
+   *
+   * @see  PageContext
+   */
+  public Password(
+    com.pragmatickm.password.model.Password element,
+    String password
+  ) {
+    this(
+      PageContext.getServletContext(),
+      PageContext.getRequest(),
+      PageContext.getResponse(),
+      element,
+      password
+    );
+  }
 
-	/**
-	 * Creates a new password in the current page context.
-	 *
-	 * @see  PageContext
-	 */
-	public Password(String password) {
-		this(
-			PageContext.getServletContext(),
-			PageContext.getRequest(),
-			PageContext.getResponse(),
-			password
-		);
-	}
+  /**
+   * Creates a new password in the current page context.
+   *
+   * @see  PageContext
+   */
+  public Password(String password) {
+    this(
+      PageContext.getServletContext(),
+      PageContext.getRequest(),
+      PageContext.getResponse(),
+      password
+    );
+  }
 
-	@Override
-	public Password id(String id) {
-		super.id(id);
-		return this;
-	}
+  @Override
+  public Password id(String id) {
+    super.id(id);
+    return this;
+  }
 
-	public Password href(String href) {
-		element.setHref(href);
-		return this;
-	}
+  public Password href(String href) {
+    element.setHref(href);
+    return this;
+  }
 
-	public Password username(String username) {
-		element.setUsername(username);
-		return this;
-	}
+  public Password username(String username) {
+    element.setUsername(username);
+    return this;
+  }
 
-	/* Already set in constructor
-	public Password password(String password) {
-		element.setPassword(password);
-		return this;
-	}*/
+  /* Already set in constructor
+  public Password password(String password) {
+    element.setPassword(password);
+    return this;
+  }*/
 
-	public Password customField(String name, PageRef pageRef, String element, String value) {
-		this.element.addCustomField(name, pageRef, element, value);
-		return this;
-	}
+  public Password customField(String name, PageRef pageRef, String element, String value) {
+    this.element.addCustomField(name, pageRef, element, value);
+    return this;
+  }
 
-	public Password secretQuestion(String question, String answer) {
-		boolean demoMode = SemanticCMS.getInstance(servletContext).getDemoMode();
-		element.addSecretQuestion(question, demoMode ? com.aoapps.security.Password.MASKED_PASSWORD : answer);
-		return this;
-	}
+  public Password secretQuestion(String question, String answer) {
+    boolean demoMode = SemanticCMS.getInstance(servletContext).getDemoMode();
+    element.addSecretQuestion(question, demoMode ? com.aoapps.security.Password.MASKED_PASSWORD : answer);
+    return this;
+  }
 
-	private SemanticCMS semanticCMS;
-	private PageIndex pageIndex;
-	@Override
-	protected void doBody(CaptureLevel captureLevel, Body<? super com.pragmatickm.password.model.Password> body) throws ServletException, IOException, SkipPageException {
-		semanticCMS = SemanticCMS.getInstance(servletContext);
-		pageIndex = PageIndex.getCurrentPageIndex(request);
-		super.doBody(captureLevel, body);
-	}
+  private SemanticCMS semanticCMS;
+  private PageIndex pageIndex;
+  @Override
+  protected void doBody(CaptureLevel captureLevel, Body<? super com.pragmatickm.password.model.Password> body) throws ServletException, IOException, SkipPageException {
+    semanticCMS = SemanticCMS.getInstance(servletContext);
+    pageIndex = PageIndex.getCurrentPageIndex(request);
+    super.doBody(captureLevel, body);
+  }
 
-	@Override
-	public void writeTo(Writer out, ElementContext context) throws IOException, ServletException, SkipPageException {
-		if(!(element.getParentElement() instanceof PasswordTable)) {
-			PasswordImpl.writePassword(
-				semanticCMS,
-				pageIndex,
-				new DocumentEE(servletContext, request, response, out),
-				context,
-				element
-			);
-		}
-	}
+  @Override
+  public void writeTo(Writer out, ElementContext context) throws IOException, ServletException, SkipPageException {
+    if (!(element.getParentElement() instanceof PasswordTable)) {
+      PasswordImpl.writePassword(
+        semanticCMS,
+        pageIndex,
+        new DocumentEE(servletContext, request, response, out),
+        context,
+        element
+      );
+    }
+  }
 }

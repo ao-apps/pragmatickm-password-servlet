@@ -61,285 +61,305 @@ import javax.servlet.http.HttpServletResponse;
 
 public final class PasswordTableImpl {
 
-	/** Make no instances. */
-	private PasswordTableImpl() {throw new AssertionError();}
+  /** Make no instances. */
+  private PasswordTableImpl() {
+    throw new AssertionError();
+  }
 
-	public static void writePasswordTable(
-		ServletContext servletContext,
-		HttpServletRequest request,
-		HttpServletResponse response,
-		AnyPalpableContent<?, ?> content,
-		PasswordTable passwordTable,
-		Iterable<? extends Password> passwords,
-		Object style
-	) throws IOException, ServletException {
-		SemanticCMS semanticCMS = SemanticCMS.getInstance(servletContext);
-		PageIndex pageIndex = PageIndex.getCurrentPageIndex(request);
-		// Combine passwords from both attribute and body
-		List<Password> allPasswords = new ArrayList<>();
-		if(passwords != null) {
-			for(Password password : passwords) {
-				allPasswords.add(password);
-			}
-		}
-		for(Element childElement : passwordTable.getChildElements()) {
-			if(childElement instanceof Password) allPasswords.add((Password)childElement);
-		}
+  public static void writePasswordTable(
+    ServletContext servletContext,
+    HttpServletRequest request,
+    HttpServletResponse response,
+    AnyPalpableContent<?, ?> content,
+    PasswordTable passwordTable,
+    Iterable<? extends Password> passwords,
+    Object style
+  ) throws IOException, ServletException {
+    SemanticCMS semanticCMS = SemanticCMS.getInstance(servletContext);
+    PageIndex pageIndex = PageIndex.getCurrentPageIndex(request);
+    // Combine passwords from both attribute and body
+    List<Password> allPasswords = new ArrayList<>();
+    if (passwords != null) {
+      for (Password password : passwords) {
+        allPasswords.add(password);
+      }
+    }
+    for (Element childElement : passwordTable.getChildElements()) {
+      if (childElement instanceof Password) {
+        allPasswords.add((Password)childElement);
+      }
+    }
 
-		// Find which columns need to be displayed
-		boolean hasHref = false;
-		Set<String> uniqueCustomFields = new LinkedHashSet<>();
-		boolean hasUsername = false;
-		boolean hasSecretQuestion = false;
-		for(Password password : allPasswords) {
-			if(password.getHref()!=null) hasHref = true;
-			uniqueCustomFields.addAll(password.getCustomFields().keySet());
-			if(password.getUsername()!=null) hasUsername = true;
-			if(!password.getSecretQuestions().isEmpty()) hasSecretQuestion = true;
-		}
-		int colCount = 1;
-		if(hasHref) colCount++;
-		colCount += uniqueCustomFields.size();
-		if(hasUsername) colCount++;
-		if(hasSecretQuestion) colCount += 2;
-		// Print the table
-		String id = passwordTable.getId();
-		try (
-			AnyTABLE_c<?, ?, ?> table = content.table()
-				.id((id == null) ? null : idAttr -> PageIndex.appendIdInPage(
-					pageIndex,
-					passwordTable.getPage(),
-					id,
-					idAttr
-				))
-				.clazz("ao-grid", "pragmatickm-password")
-				.style(style)
-			._c()
-		) {
-			try (AnyTHEAD_c<?, ?, ?> thead = table.thead_c()) {
-				assert colCount >= 1;
-				final String header = passwordTable.getHeader();
-				if(header != null) {
-					try (AnyTR_c<?, ?, ?> tr = thead.tr_c()) {
-						tr.th().clazz("pragmatickm-password-header").colspan(colCount).__(th -> th
-							.div__(header)
-						);
-					}
-				}
-				if(colCount > 1) {
-					try (AnyTR_c<?, ?, ?> tr = thead.tr_c()) {
-						if(hasHref) {
-							tr.th__("Site");
-						}
-						for(String customField : uniqueCustomFields) {
-							tr.th__(customField);
-						}
-						if(hasUsername) {
-							tr.th__("Username");
-						}
-						tr.th__("Password");
-						if(hasSecretQuestion) {
-							tr.th__("Secret Question")
-							.th__("Secret Answer");
-						}
-					}
-				}
-			}
-			try (AnyTBODY_c<?, ?, ?> tbody = table.tbody_c()) {
-				// Group like custom values into rowspan
-				int hrefRowsLeft = 0;
-				Map<String, Integer> customValueRowsLeft = new HashMap<>();
-				for(int pwIndex = 0, pwSize = allPasswords.size(); pwIndex < pwSize; pwIndex++) {
-					Password password = allPasswords.get(pwIndex);
-					Map<String, String> securityQuestions = password.getSecretQuestions();
-					int rowSpan = securityQuestions.isEmpty() ? 1 : securityQuestions.size();
-					Iterator<Map.Entry<String, String>> securityQuestionIter = securityQuestions.entrySet().iterator();
-					for(int row = 0; row < rowSpan; row++) {
-						try(AnyTR_c<?, ?, ?> tr = tbody.tr_c()) {
-							if(row == 0) {
-								if(hasHref) {
-									if(hrefRowsLeft>0) {
-										// Skip row and decrement counter
-										hrefRowsLeft--;
-									} else {
-										// Look ahead for the total number of values to group
-										String href = password.getHref();
-										assert hrefRowsLeft == 0;
-										for(int aheadIndex = pwIndex + 1; aheadIndex < pwSize; aheadIndex++) {
-											Password aheadPw = allPasswords.get(aheadIndex);
-											String ahead = aheadPw.getHref();
-											if(Objects.equals(href, ahead)) {
-												hrefRowsLeft += Math.max(1, aheadPw.getSecretQuestions().size());
-											} else {
-												break;
-											}
-										}
-										int totalRowSpan = rowSpan + hrefRowsLeft;
-										assert totalRowSpan >= 1;
-										try (AnyTD_c<?, ?, ?> td = tr.td().rowspan(totalRowSpan)._c()) {
-											if(href != null) {
-												td.a(HttpServletUtil.buildURL(request, response, href, null, false, false)).__(href);
-											}
-										}
-									}
-								}
-								Map<String, Password.CustomField> customFields = password.getCustomFields();
-								for(String customField : uniqueCustomFields) {
-									Integer rowsLeft = customValueRowsLeft.get(customField);
-									if(rowsLeft != null) {
-										// Skip row and decrement counter
-										customValueRowsLeft.put(
-											customField,
-											rowsLeft == 1 ? null : (rowsLeft - 1)
-										);
-									} else {
-										// Look ahead for the total number of custom values to group
-										Password.CustomField value = customFields.get(customField);
-										int newRowsLeft = 0;
-										for(int aheadIndex = pwIndex + 1; aheadIndex < pwSize; aheadIndex++) {
-											Password aheadPw = allPasswords.get(aheadIndex);
-											Password.CustomField ahead = aheadPw.getCustomFields().get(customField);
-											if(Objects.equals(value, ahead)) {
-												newRowsLeft += Math.max(1, aheadPw.getSecretQuestions().size());
-											} else {
-												break;
-											}
-										}
-										if(newRowsLeft > 0) {
-											customValueRowsLeft.put(
-												customField,
-												newRowsLeft
-											);
-										}
-										int totalRowSpan = rowSpan + newRowsLeft;
-										assert totalRowSpan >= 1;
-										tr.td().rowspan(totalRowSpan).__(td -> {
-											if(value != null) {
-												final PageRef pageRef = value.getPageRef();
-												final String element = value.getElement();
-												if(pageRef != null) {
-													// TODO: Capture all the pages above in a batch, allows for concurrent capture
-													// Get the target page even when value is also provided to validate correct page linking
-													Page targetPage =
-														pageRef.getBook() == null
-														? null
-														: CapturePage.capturePage(
-															servletContext,
-															request,
-															response,
-															pageRef,
-															element==null ? CaptureLevel.PAGE : CaptureLevel.META
-														)
-													;
-													// Find the element
-													Element targetElement;
-													if(element != null && targetPage != null) {
-														targetElement = targetPage.getElementsById().get(element);
-														if(targetElement == null) throw new ServletException("Element not found in target page: " + element);
-														if(targetPage.getGeneratedIds().contains(element)) throw new ServletException("Not allowed to link to a generated element id, set an explicit id on the target element: " + element);
-													} else {
-														targetElement = null;
-													}
+    // Find which columns need to be displayed
+    boolean hasHref = false;
+    Set<String> uniqueCustomFields = new LinkedHashSet<>();
+    boolean hasUsername = false;
+    boolean hasSecretQuestion = false;
+    for (Password password : allPasswords) {
+      if (password.getHref() != null) {
+        hasHref = true;
+      }
+      uniqueCustomFields.addAll(password.getCustomFields().keySet());
+      if (password.getUsername() != null) {
+        hasUsername = true;
+      }
+      if (!password.getSecretQuestions().isEmpty()) {
+        hasSecretQuestion = true;
+      }
+    }
+    int colCount = 1;
+    if (hasHref) {
+      colCount++;
+    }
+    colCount += uniqueCustomFields.size();
+    if (hasUsername) {
+      colCount++;
+    }
+    if (hasSecretQuestion) {
+      colCount += 2;
+    }
+    // Print the table
+    String id = passwordTable.getId();
+    try (
+      AnyTABLE_c<?, ?, ?> table = content.table()
+        .id((id == null) ? null : idAttr -> PageIndex.appendIdInPage(
+          pageIndex,
+          passwordTable.getPage(),
+          id,
+          idAttr
+        ))
+        .clazz("ao-grid", "pragmatickm-password")
+        .style(style)
+      ._c()
+    ) {
+      try (AnyTHEAD_c<?, ?, ?> thead = table.thead_c()) {
+        assert colCount >= 1;
+        final String header = passwordTable.getHeader();
+        if (header != null) {
+          try (AnyTR_c<?, ?, ?> tr = thead.tr_c()) {
+            tr.th().clazz("pragmatickm-password-header").colspan(colCount).__(th -> th
+              .div__(header)
+            );
+          }
+        }
+        if (colCount > 1) {
+          try (AnyTR_c<?, ?, ?> tr = thead.tr_c()) {
+            if (hasHref) {
+              tr.th__("Site");
+            }
+            for (String customField : uniqueCustomFields) {
+              tr.th__(customField);
+            }
+            if (hasUsername) {
+              tr.th__("Username");
+            }
+            tr.th__("Password");
+            if (hasSecretQuestion) {
+              tr.th__("Secret Question")
+              .th__("Secret Answer");
+            }
+          }
+        }
+      }
+      try (AnyTBODY_c<?, ?, ?> tbody = table.tbody_c()) {
+        // Group like custom values into rowspan
+        int hrefRowsLeft = 0;
+        Map<String, Integer> customValueRowsLeft = new HashMap<>();
+        for (int pwIndex = 0, pwSize = allPasswords.size(); pwIndex < pwSize; pwIndex++) {
+          Password password = allPasswords.get(pwIndex);
+          Map<String, String> securityQuestions = password.getSecretQuestions();
+          int rowSpan = securityQuestions.isEmpty() ? 1 : securityQuestions.size();
+          Iterator<Map.Entry<String, String>> securityQuestionIter = securityQuestions.entrySet().iterator();
+          for (int row = 0; row < rowSpan; row++) {
+            try (AnyTR_c<?, ?, ?> tr = tbody.tr_c()) {
+              if (row == 0) {
+                if (hasHref) {
+                  if (hrefRowsLeft>0) {
+                    // Skip row and decrement counter
+                    hrefRowsLeft--;
+                  } else {
+                    // Look ahead for the total number of values to group
+                    String href = password.getHref();
+                    assert hrefRowsLeft == 0;
+                    for (int aheadIndex = pwIndex + 1; aheadIndex < pwSize; aheadIndex++) {
+                      Password aheadPw = allPasswords.get(aheadIndex);
+                      String ahead = aheadPw.getHref();
+                      if (Objects.equals(href, ahead)) {
+                        hrefRowsLeft += Math.max(1, aheadPw.getSecretQuestions().size());
+                      } else {
+                        break;
+                      }
+                    }
+                    int totalRowSpan = rowSpan + hrefRowsLeft;
+                    assert totalRowSpan >= 1;
+                    try (AnyTD_c<?, ?, ?> td = tr.td().rowspan(totalRowSpan)._c()) {
+                      if (href != null) {
+                        td.a(HttpServletUtil.buildURL(request, response, href, null, false, false)).__(href);
+                      }
+                    }
+                  }
+                }
+                Map<String, Password.CustomField> customFields = password.getCustomFields();
+                for (String customField : uniqueCustomFields) {
+                  Integer rowsLeft = customValueRowsLeft.get(customField);
+                  if (rowsLeft != null) {
+                    // Skip row and decrement counter
+                    customValueRowsLeft.put(
+                      customField,
+                      rowsLeft == 1 ? null : (rowsLeft - 1)
+                    );
+                  } else {
+                    // Look ahead for the total number of custom values to group
+                    Password.CustomField value = customFields.get(customField);
+                    int newRowsLeft = 0;
+                    for (int aheadIndex = pwIndex + 1; aheadIndex < pwSize; aheadIndex++) {
+                      Password aheadPw = allPasswords.get(aheadIndex);
+                      Password.CustomField ahead = aheadPw.getCustomFields().get(customField);
+                      if (Objects.equals(value, ahead)) {
+                        newRowsLeft += Math.max(1, aheadPw.getSecretQuestions().size());
+                      } else {
+                        break;
+                      }
+                    }
+                    if (newRowsLeft > 0) {
+                      customValueRowsLeft.put(
+                        customField,
+                        newRowsLeft
+                      );
+                    }
+                    int totalRowSpan = rowSpan + newRowsLeft;
+                    assert totalRowSpan >= 1;
+                    tr.td().rowspan(totalRowSpan).__(td -> {
+                      if (value != null) {
+                        final PageRef pageRef = value.getPageRef();
+                        final String element = value.getElement();
+                        if (pageRef != null) {
+                          // TODO: Capture all the pages above in a batch, allows for concurrent capture
+                          // Get the target page even when value is also provided to validate correct page linking
+                          Page targetPage =
+                            pageRef.getBook() == null
+                            ? null
+                            : CapturePage.capturePage(
+                              servletContext,
+                              request,
+                              response,
+                              pageRef,
+                              element == null ? CaptureLevel.PAGE : CaptureLevel.META
+                            )
+                          ;
+                          // Find the element
+                          Element targetElement;
+                          if (element != null && targetPage != null) {
+                            targetElement = targetPage.getElementsById().get(element);
+                            if (targetElement == null) {
+                              throw new ServletException("Element not found in target page: " + element);
+                            }
+                            if (targetPage.getGeneratedIds().contains(element)) {
+                              throw new ServletException("Not allowed to link to a generated element id, set an explicit id on the target element: " + element);
+                            }
+                          } else {
+                            targetElement = null;
+                          }
 
-													Integer index = pageIndex==null ? null : pageIndex.getPageIndex(pageRef);
+                          Integer index = pageIndex == null ? null : pageIndex.getPageIndex(pageRef);
 
-													StringBuilder href = new StringBuilder();
-													if(element == null) {
-														if(index != null) {
-															href.append('#');
-															URIEncoder.encodeURIComponent(
-																PageIndex.getRefId(
-																	index,
-																	null
-																),
-																href
-															);
-														} else {
-															URIEncoder.encodeURI(request.getContextPath(), href);
-															URIEncoder.encodeURI(pageRef.getServletPath(), href);
-														}
-													} else {
-														if(index != null) {
-															href.append('#');
-															URIEncoder.encodeURIComponent(
-																PageIndex.getRefId(
-																	index,
-																	element
-																),
-																href
-															);
-														} else {
-															URIEncoder.encodeURI(request.getContextPath(), href);
-															URIEncoder.encodeURI(pageRef.getServletPath(), href);
-															href.append('#');
-															URIEncoder.encodeURIComponent(element, href);
-														}
-													}
-													td
-														.a(response.encodeURL(href.toString()))
-														.clazz(targetElement == null ? null : semanticCMS.getLinkCssClass(targetElement))
-													.__(a -> {
-														if(value.getValue() != null) {
-															a.text(value.getValue());
-														} else {
-															if(targetElement != null) {
-																a.text(targetElement);
-															} else if(targetPage != null) {
-																a.text(targetPage.getTitle());
-															} else {
-																a.text(text -> LinkImpl.writeBrokenPath(pageRef, text));
-															}
-														}
-														if(index != null) {
-															a.sup__any(sup -> sup
-																.text('[').text(index + 1).text(']')
-															);
-														}
-													});
-												} else {
-													td.text(value.getValue());
-												}
-											}
-										});
-									}
-								}
-								assert rowSpan >= 1;
-								if(hasUsername) {
-									tr.td().rowspan(rowSpan).__(password.getUsername());
-								}
-								String pid = password.getId();
-								tr.td().rowspan(rowSpan).__(td -> td
-									.span()
-										.id((pid == null) ? null : idAttr -> PageIndex.appendIdInPage(
-											pageIndex,
-											passwordTable.getPage(),
-											pid,
-											idAttr
-										))
-										.clazz(semanticCMS.getLinkCssClass(password))
-									.__(password.getPassword())
-								);
-							}
-							if(hasSecretQuestion) {
-								Map.Entry<String, String> entry = securityQuestionIter.hasNext() ? securityQuestionIter.next() : null;
-								tr.td__(entry == null ? null : entry.getKey())
-								.td__(entry == null ? null : entry.getValue());
-							}
-						}
-					}
-				}
-				BufferResult body = passwordTable.getBody();
-				if(body.getLength() > 0) {
-					assert colCount >= 1;
-					try (AnyTR_c<?, ?, ?> tr = tbody.tr_c()) {
-						tr.td().clazz("pragmatickm-password-body").colspan(colCount).__(td -> {
-							@SuppressWarnings("deprecation")
-							Writer unsafe = td.getRawUnsafe();
-							body.writeTo(new NodeBodyWriter(passwordTable, unsafe, new ServletElementContext(servletContext, request, response)));
-						});
-					}
-				}
-			}
-		}
-	}
+                          StringBuilder href = new StringBuilder();
+                          if (element == null) {
+                            if (index != null) {
+                              href.append('#');
+                              URIEncoder.encodeURIComponent(
+                                PageIndex.getRefId(
+                                  index,
+                                  null
+                                ),
+                                href
+                              );
+                            } else {
+                              URIEncoder.encodeURI(request.getContextPath(), href);
+                              URIEncoder.encodeURI(pageRef.getServletPath(), href);
+                            }
+                          } else {
+                            if (index != null) {
+                              href.append('#');
+                              URIEncoder.encodeURIComponent(
+                                PageIndex.getRefId(
+                                  index,
+                                  element
+                                ),
+                                href
+                              );
+                            } else {
+                              URIEncoder.encodeURI(request.getContextPath(), href);
+                              URIEncoder.encodeURI(pageRef.getServletPath(), href);
+                              href.append('#');
+                              URIEncoder.encodeURIComponent(element, href);
+                            }
+                          }
+                          td
+                            .a(response.encodeURL(href.toString()))
+                            .clazz(targetElement == null ? null : semanticCMS.getLinkCssClass(targetElement))
+                          .__(a -> {
+                            if (value.getValue() != null) {
+                              a.text(value.getValue());
+                            } else {
+                              if (targetElement != null) {
+                                a.text(targetElement);
+                              } else if (targetPage != null) {
+                                a.text(targetPage.getTitle());
+                              } else {
+                                a.text(text -> LinkImpl.writeBrokenPath(pageRef, text));
+                              }
+                            }
+                            if (index != null) {
+                              a.sup__any(sup -> sup
+                                .text('[').text(index + 1).text(']')
+                              );
+                            }
+                          });
+                        } else {
+                          td.text(value.getValue());
+                        }
+                      }
+                    });
+                  }
+                }
+                assert rowSpan >= 1;
+                if (hasUsername) {
+                  tr.td().rowspan(rowSpan).__(password.getUsername());
+                }
+                String pid = password.getId();
+                tr.td().rowspan(rowSpan).__(td -> td
+                  .span()
+                    .id((pid == null) ? null : idAttr -> PageIndex.appendIdInPage(
+                      pageIndex,
+                      passwordTable.getPage(),
+                      pid,
+                      idAttr
+                    ))
+                    .clazz(semanticCMS.getLinkCssClass(password))
+                  .__(password.getPassword())
+                );
+              }
+              if (hasSecretQuestion) {
+                Map.Entry<String, String> entry = securityQuestionIter.hasNext() ? securityQuestionIter.next() : null;
+                tr.td__(entry == null ? null : entry.getKey())
+                .td__(entry == null ? null : entry.getValue());
+              }
+            }
+          }
+        }
+        BufferResult body = passwordTable.getBody();
+        if (body.getLength() > 0) {
+          assert colCount >= 1;
+          try (AnyTR_c<?, ?, ?> tr = tbody.tr_c()) {
+            tr.td().clazz("pragmatickm-password-body").colspan(colCount).__(td -> {
+              @SuppressWarnings("deprecation")
+              Writer unsafe = td.getRawUnsafe();
+              body.writeTo(new NodeBodyWriter(passwordTable, unsafe, new ServletElementContext(servletContext, request, response)));
+            });
+          }
+        }
+      }
+    }
+  }
 }
