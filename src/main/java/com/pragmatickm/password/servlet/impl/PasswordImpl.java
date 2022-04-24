@@ -38,21 +38,21 @@ public final class PasswordImpl {
   }
 
   public static void writePassword(
-    SemanticCMS semanticCMS,
-    PageIndex pageIndex,
-    AnyUnion_Palpable_Phrasing<?, ?> content,
-    ElementContext context,
-    Password password
+      SemanticCMS semanticCMS,
+      PageIndex pageIndex,
+      AnyUnion_Palpable_Phrasing<?, ?> content,
+      ElementContext context,
+      Password password
   ) throws IOException {
     String id = password.getId();
     content.span()
-      .id((id == null) ? null : idAttr -> PageIndex.appendIdInPage(
-        pageIndex,
-        password.getPage(),
-        id,
-        idAttr
-      ))
-      .clazz(semanticCMS.getLinkCssClass(password))
-    .__(password.getPassword());
+        .id((id == null) ? null : idAttr -> PageIndex.appendIdInPage(
+            pageIndex,
+            password.getPage(),
+            id,
+            idAttr
+        ))
+        .clazz(semanticCMS.getLinkCssClass(password))
+        .__(password.getPassword());
   }
 }

@@ -56,14 +56,14 @@ public final class Functions {
   public static String generateShortPassword() {
     // Only use characters 0-9, A-Z, and a-z
     StringBuilder sb = new StringBuilder(SHORT_PASSWORD_LENGTH);
-    for (int i=0; i<SHORT_PASSWORD_LENGTH; i++) {
+    for (int i = 0; i < SHORT_PASSWORD_LENGTH; i++) {
       int val = secureRandom.nextInt(10 + 26 + 26);
-      if (val<10) {
+      if (val < 10) {
         sb.append(val);
       } else if (val < (10 + 26)) {
-        sb.append((char)(val - 10 + 'A'));
+        sb.append((char) (val - 10 + 'A'));
       } else {
-        sb.append((char)(val - (10 + 26) + 'a'));
+        sb.append((char) (val - (10 + 26) + 'a'));
       }
     }
     return sb.toString();
