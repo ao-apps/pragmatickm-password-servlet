@@ -43,48 +43,48 @@ import javax.servlet.jsp.SkipPageException;
 public class PasswordTable extends Element<com.pragmatickm.password.model.PasswordTable> {
 
   public PasswordTable(
-    ServletContext servletContext,
-    HttpServletRequest request,
-    HttpServletResponse response,
-    com.pragmatickm.password.model.PasswordTable element
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      com.pragmatickm.password.model.PasswordTable element
   ) {
     super(
-      servletContext,
-      request,
-      response,
-      element
+        servletContext,
+        request,
+        response,
+        element
     );
   }
 
   public PasswordTable(
-    ServletContext servletContext,
-    HttpServletRequest request,
-    HttpServletResponse response
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response
   ) {
     this(
-      servletContext,
-      request,
-      response,
-      new com.pragmatickm.password.model.PasswordTable()
+        servletContext,
+        request,
+        response,
+        new com.pragmatickm.password.model.PasswordTable()
     );
   }
 
   public PasswordTable(
-    ServletContext servletContext,
-    HttpServletRequest request,
-    HttpServletResponse response,
-    com.pragmatickm.password.model.PasswordTable element,
-    String header
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      com.pragmatickm.password.model.PasswordTable element,
+      String header
   ) {
     this(servletContext, request, response, element);
     element.setHeader(header);
   }
 
   public PasswordTable(
-    ServletContext servletContext,
-    HttpServletRequest request,
-    HttpServletResponse response,
-    String header
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      String header
   ) {
     this(servletContext, request, response);
     element.setHeader(header);
@@ -97,10 +97,10 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
    */
   public PasswordTable(com.pragmatickm.password.model.PasswordTable element) {
     this(
-      PageContext.getServletContext(),
-      PageContext.getRequest(),
-      PageContext.getResponse(),
-      element
+        PageContext.getServletContext(),
+        PageContext.getRequest(),
+        PageContext.getResponse(),
+        element
     );
   }
 
@@ -111,9 +111,9 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
    */
   public PasswordTable() {
     this(
-      PageContext.getServletContext(),
-      PageContext.getRequest(),
-      PageContext.getResponse()
+        PageContext.getServletContext(),
+        PageContext.getRequest(),
+        PageContext.getResponse()
     );
   }
 
@@ -121,8 +121,8 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
    * @see  #PasswordTable(com.pragmatickm.password.model.PasswordTable)
    */
   public PasswordTable(
-    com.pragmatickm.password.model.PasswordTable element,
-    String header
+      com.pragmatickm.password.model.PasswordTable element,
+      String header
   ) {
     this(element);
     element.setHeader(header);
@@ -148,18 +148,21 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
   }
 
   private Iterable<? extends com.pragmatickm.password.model.Password> passwords;
+
   public PasswordTable passwords(Iterable<? extends com.pragmatickm.password.model.Password> passwords) {
     this.passwords = passwords;
     return this;
   }
 
   private Object style;
+
   public PasswordTable style(Object style) {
     this.style = style;
     return this;
   }
 
   private BufferResult writeMe;
+
   @Override
   protected void doBody(CaptureLevel captureLevel, Body<? super com.pragmatickm.password.model.PasswordTable> body) throws ServletException, IOException, SkipPageException {
     super.doBody(captureLevel, body);
@@ -167,13 +170,13 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
       BufferWriter capturedOut = EncodingBufferedTag.newBufferWriter(request);
       try {
         PasswordTableHtmlRenderer.writePasswordTable(
-          servletContext,
-          request,
-          response,
-          new DocumentEE(servletContext, request, response, capturedOut),
-          element,
-          passwords,
-          style
+            servletContext,
+            request,
+            response,
+            new DocumentEE(servletContext, request, response, capturedOut),
+            element,
+            passwords,
+            style
         );
       } finally {
         capturedOut.close();

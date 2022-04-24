@@ -45,34 +45,34 @@ import javax.servlet.jsp.SkipPageException;
 public class Password extends Element<com.pragmatickm.password.model.Password> {
 
   public Password(
-    ServletContext servletContext,
-    HttpServletRequest request,
-    HttpServletResponse response,
-    com.pragmatickm.password.model.Password element,
-    String password
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      com.pragmatickm.password.model.Password element,
+      String password
   ) {
     super(
-      servletContext,
-      request,
-      response,
-      element
+        servletContext,
+        request,
+        response,
+        element
     );
     boolean demoMode = SemanticCMS.getInstance(servletContext).getDemoMode();
     element.setPassword(demoMode ? com.aoapps.security.Password.MASKED_PASSWORD : password);
   }
 
   public Password(
-    ServletContext servletContext,
-    HttpServletRequest request,
-    HttpServletResponse response,
-    String password
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      String password
   ) {
     this(
-      servletContext,
-      request,
-      response,
-      new com.pragmatickm.password.model.Password(),
-      password
+        servletContext,
+        request,
+        response,
+        new com.pragmatickm.password.model.Password(),
+        password
     );
   }
 
@@ -82,15 +82,15 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
    * @see  PageContext
    */
   public Password(
-    com.pragmatickm.password.model.Password element,
-    String password
+      com.pragmatickm.password.model.Password element,
+      String password
   ) {
     this(
-      PageContext.getServletContext(),
-      PageContext.getRequest(),
-      PageContext.getResponse(),
-      element,
-      password
+        PageContext.getServletContext(),
+        PageContext.getRequest(),
+        PageContext.getResponse(),
+        element,
+        password
     );
   }
 
@@ -101,10 +101,10 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
    */
   public Password(String password) {
     this(
-      PageContext.getServletContext(),
-      PageContext.getRequest(),
-      PageContext.getResponse(),
-      password
+        PageContext.getServletContext(),
+        PageContext.getRequest(),
+        PageContext.getResponse(),
+        password
     );
   }
 
@@ -143,6 +143,7 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
 
   private HtmlRenderer htmlRenderer;
   private PageIndex pageIndex;
+
   @Override
   protected void doBody(CaptureLevel captureLevel, Body<? super com.pragmatickm.password.model.Password> body) throws ServletException, IOException, SkipPageException {
     htmlRenderer = HtmlRenderer.getInstance(servletContext);
@@ -154,11 +155,11 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
   public void writeTo(Writer out, ElementContext context) throws IOException, ServletException, SkipPageException {
     if (!(element.getParentElement() instanceof PasswordTable)) {
       PasswordHtmlRenderer.writePassword(
-        htmlRenderer,
-        pageIndex,
-        new DocumentEE(servletContext, request, response, out),
-        context,
-        element
+          htmlRenderer,
+          pageIndex,
+          new DocumentEE(servletContext, request, response, out),
+          context,
+          element
       );
     }
   }
