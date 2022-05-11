@@ -38,7 +38,7 @@ public final class PasswordImpl {
   }
 
   public static void writePassword(
-      SemanticCMS semanticCMS,
+      SemanticCMS semanticCms,
       PageIndex pageIndex,
       AnyUnion_Palpable_Phrasing<?, ?> content,
       ElementContext context,
@@ -52,7 +52,7 @@ public final class PasswordImpl {
             id,
             idAttr
         ))
-        .clazz(semanticCMS.getLinkCssClass(password))
+        .clazz(semanticCms.getLinkCssClass(password))
         .__(password.getPassword());
   }
 }

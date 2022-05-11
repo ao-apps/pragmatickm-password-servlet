@@ -29,6 +29,9 @@ import java.io.IOException;
 import java.security.SecureRandom;
 import javax.servlet.ServletRequest;
 
+/**
+ * Tag library function implementations.
+ */
 public final class Functions {
 
   /** Make no instances. */

@@ -75,7 +75,7 @@ public final class PasswordTableImpl {
       Iterable<? extends Password> passwords,
       Object style
   ) throws IOException, ServletException {
-    SemanticCMS semanticCMS = SemanticCMS.getInstance(servletContext);
+    SemanticCMS semanticCms = SemanticCMS.getInstance(servletContext);
     PageIndex pageIndex = PageIndex.getCurrentPageIndex(request);
     // Combine passwords from both attribute and body
     List<Password> allPasswords = new ArrayList<>();
@@ -121,7 +121,7 @@ public final class PasswordTableImpl {
     // Print the table
     String id = passwordTable.getId();
     try (
-      AnyTABLE_c<?, ?, ?> table = content.table()
+        AnyTABLE_c<?, ?, ?> table = content.table()
             .id((id == null) ? null : idAttr -> PageIndex.appendIdInPage(
                 pageIndex,
                 passwordTable.getPage(),
@@ -138,7 +138,7 @@ public final class PasswordTableImpl {
         if (header != null) {
           try (AnyTR_c<?, ?, ?> tr = thead.tr_c()) {
             tr.th().clazz("pragmatickm-password-header").colspan(colCount).__(th -> th
-                    .div__(header)
+                .div__(header)
             );
           }
         }
@@ -245,8 +245,7 @@ public final class PasswordTableImpl {
                                   response,
                                   pageRef,
                                   element == null ? CaptureLevel.PAGE : CaptureLevel.META
-                              )
-                          ;
+                              );
                           // Find the element
                           Element targetElement;
                           if (element != null && targetPage != null) {
@@ -297,7 +296,7 @@ public final class PasswordTableImpl {
                           }
                           td
                               .a(response.encodeURL(href.toString()))
-                              .clazz(targetElement == null ? null : semanticCMS.getLinkCssClass(targetElement))
+                              .clazz(targetElement == null ? null : semanticCms.getLinkCssClass(targetElement))
                               .__(a -> {
                                 if (value.getValue() != null) {
                                   a.text(value.getValue());
@@ -312,7 +311,7 @@ public final class PasswordTableImpl {
                                 }
                                 if (index != null) {
                                   a.sup__any(sup -> sup
-                                          .text('[').text(index + 1).text(']')
+                                      .text('[').text(index + 1).text(']')
                                   );
                                 }
                               });
@@ -329,15 +328,15 @@ public final class PasswordTableImpl {
                 }
                 String pid = password.getId();
                 tr.td().rowspan(rowSpan).__(td -> td
-                        .span()
-                        .id((pid == null) ? null : idAttr -> PageIndex.appendIdInPage(
-                            pageIndex,
-                            passwordTable.getPage(),
-                            pid,
-                            idAttr
-                        ))
-                        .clazz(semanticCMS.getLinkCssClass(password))
-                        .__(password.getPassword())
+                    .span()
+                    .id((pid == null) ? null : idAttr -> PageIndex.appendIdInPage(
+                        pageIndex,
+                        passwordTable.getPage(),
+                        pid,
+                        idAttr
+                    ))
+                    .clazz(semanticCms.getLinkCssClass(password))
+                    .__(password.getPassword())
                 );
               }
               if (hasSecretQuestion) {
