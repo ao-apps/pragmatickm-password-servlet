@@ -350,7 +350,7 @@ along with pragmatickm-password-servlet.  If not, see <https://www.gnu.org/licen
         <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId><version>1.14.1${POST-SNAPSHOT}</version>
       </dependency>
       <dependency>
-        <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-servlet</artifactId><version>1.18.3-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+        <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-servlet</artifactId><version>1.18.3${POST-SNAPSHOT}</version>
       </dependency>
       <!-- Transitive -->
       <dependency>
