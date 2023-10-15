@@ -210,6 +210,11 @@ along with pragmatickm-password-servlet.  If not, see <https://www.gnu.org/licen
                       <includes>element-list, package-list</includes>
                       <outputDirectory>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-servlet</outputDirectory>
                     </artifactItem>
+                    <artifactItem>
+                      <groupId>com.github.spotbugs</groupId><artifactId>spotbugs-annotations</artifactId><classifier>javadoc</classifier>
+                      <includes>element-list, package-list</includes>
+                      <outputDirectory>${project.build.directory}/offlineLinks/com.github.spotbugs/spotbugs-annotations</outputDirectory>
+                    </artifactItem>
                   </artifactItems>
                 </configuration>
               </execution>
@@ -277,6 +282,10 @@ along with pragmatickm-password-servlet.  If not, see <https://www.gnu.org/licen
                 <offlineLink>
                   <url>https://semanticcms.com/core/servlet/apidocs/</url>
                   <location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-servlet</location>
+                </offlineLink>
+                <offlineLink>
+                  <url>https://javadoc.io/doc/com.github.spotbugs/spotbugs-annotations/${com.github.spotbugs:spotbugs-annotations:jar.version}/</url>
+                  <location>${project.build.directory}/offlineLinks/com.github.spotbugs/spotbugs-annotations</location>
                 </offlineLink>
               </offlineLinks>
             </configuration>
@@ -379,6 +388,9 @@ along with pragmatickm-password-servlet.  If not, see <https://www.gnu.org/licen
       </dependency>
       <dependency>
         <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-servlet</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.spotbugs</groupId><artifactId>spotbugs-annotations</artifactId><version>4.8.0</version>
       </dependency>
       <!-- Transitive -->
       <dependency>
@@ -513,6 +525,10 @@ along with pragmatickm-password-servlet.  If not, see <https://www.gnu.org/licen
     </dependency>
     <dependency>
       <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-servlet</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.spotbugs</groupId><artifactId>spotbugs-annotations</artifactId>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 </project>
