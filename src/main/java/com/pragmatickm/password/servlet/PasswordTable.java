@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-servlet - Passwords nested within SemanticCMS pages and elements in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -32,6 +32,7 @@ import com.semanticcms.core.model.ElementContext;
 import com.semanticcms.core.pages.CaptureLevel;
 import com.semanticcms.core.pages.local.PageContext;
 import com.semanticcms.core.servlet.Element;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.ServletContext;
@@ -95,6 +96,7 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
    *
    * @see  PageContext
    */
+  @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   public PasswordTable(com.pragmatickm.password.model.PasswordTable element) {
     this(
         PageContext.getServletContext(),
@@ -109,6 +111,7 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
    *
    * @see  PageContext
    */
+  @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   public PasswordTable() {
     this(
         PageContext.getServletContext(),
@@ -120,6 +123,7 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
   /**
    * @see  #PasswordTable(com.pragmatickm.password.model.PasswordTable)
    */
+  @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   public PasswordTable(
       com.pragmatickm.password.model.PasswordTable element,
       String header
@@ -131,6 +135,7 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
   /**
    * @see  #PasswordTable()
    */
+  @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   public PasswordTable(String header) {
     this();
     element.setHeader(header);

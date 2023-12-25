@@ -83,6 +83,7 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
    *
    * @see  PageContext
    */
+  @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   public Password(
       com.pragmatickm.password.model.Password element,
       String password
@@ -101,6 +102,7 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
    *
    * @see  PageContext
    */
+  @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   public Password(String password) {
     this(
         PageContext.getServletContext(),
