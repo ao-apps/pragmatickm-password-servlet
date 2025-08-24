@@ -1,6 +1,6 @@
 /*
  * pragmatickm-password-servlet - Passwords nested within SemanticCMS pages and elements in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2020, 2021, 2022, 2023, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -96,7 +96,6 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
    *
    * @see  PageContext
    */
-  @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   public PasswordTable(com.pragmatickm.password.model.PasswordTable element) {
     this(
         PageContext.getServletContext(),
@@ -111,7 +110,6 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
    *
    * @see  PageContext
    */
-  @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   public PasswordTable() {
     this(
         PageContext.getServletContext(),
