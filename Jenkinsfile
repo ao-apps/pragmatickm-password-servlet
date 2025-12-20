@@ -28,9 +28,9 @@ def upstreamProjects = [
   '../parent', // <groupId>com.pragmatickm</groupId><artifactId>pragmatickm-parent</artifactId>
 
   // Direct
-  '../../oss/encoding-taglib-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-encoding-taglib</artifactId>
+  '../../oss/encoding-taglib', // <groupId>com.aoapps</groupId><artifactId>ao-encoding-taglib</artifactId>
   '../../oss/fluent-html-any', // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-any</artifactId>
-  '../../oss/fluent-html-servlet-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-servlet</artifactId>
+  '../../oss/fluent-html-servlet', // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-servlet</artifactId>
   '../../oss/io-buffer', // <groupId>com.aoapps</groupId><artifactId>ao-io-buffer</artifactId>
   '../../oss/security', // <groupId>com.aoapps</groupId><artifactId>ao-security</artifactId>
   '../../aoserv/client', // <groupId>com.aoindustries</groupId><artifactId>aoserv-client</artifactId>
