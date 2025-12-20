@@ -29,14 +29,14 @@ def upstreamProjects = [
 
   // Direct
   '../../oss/encoding', // <groupId>com.aoapps</groupId><artifactId>ao-encoding</artifactId>
-  '../../oss/encoding-taglib-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-encoding-taglib</artifactId>
+  '../../oss/encoding-taglib', // <groupId>com.aoapps</groupId><artifactId>ao-encoding-taglib</artifactId>
   '../../oss/fluent-html-any', // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-any</artifactId>
-  '../../oss/fluent-html-servlet-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-servlet</artifactId>
+  '../../oss/fluent-html-servlet', // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-servlet</artifactId>
   '../../oss/io-buffer', // <groupId>com.aoapps</groupId><artifactId>ao-io-buffer</artifactId>
   '../../oss/lang', // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
   '../../oss/net-types', // <groupId>com.aoapps</groupId><artifactId>ao-net-types</artifactId>
   '../../oss/security', // <groupId>com.aoapps</groupId><artifactId>ao-security</artifactId>
-  '../../oss/servlet-util-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-servlet-util</artifactId>
+  '../../oss/servlet-util', // <groupId>com.aoapps</groupId><artifactId>ao-servlet-util</artifactId>
   '../../aoserv/client', // <groupId>com.aoindustries</groupId><artifactId>aoserv-client</artifactId>
   // No Jenkins: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId>
   // No Jenkins: <groupId>javax.servlet.jsp</groupId><artifactId>javax.servlet.jsp-api</artifactId>
@@ -46,7 +46,7 @@ def upstreamProjects = [
   // No Jenkins: <groupId>com.github.spotbugs</groupId><artifactId>spotbugs-annotations</artifactId>
 
   // Runtime Direct
-  '../../oss/style-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-style</artifactId>
+  '../../oss/style', // <groupId>com.aoapps</groupId><artifactId>ao-style</artifactId>
 
   // BOM
   '../../oss/javaee-web-api-bom', // <groupId>com.aoapps</groupId><artifactId>javaee-web-api-bom</artifactId>
