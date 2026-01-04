@@ -436,6 +436,9 @@ along with pragmatickm-password-servlet.  If not, see <https://www.gnu.org/licen
         <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>3.20.0</version>
       </dependency>
       <!-- jakartaee-web-profile-bom: <groupId>jakarta.el</groupId><artifactId>jakarta.el-api</artifactId> -->
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId><artifactId>jsr305</artifactId><version>3.0.2</version>
+      </dependency>
       <!-- Runtime Direct -->
       <dependency>
         <groupId>com.aoapps</groupId><artifactId>ao-style</artifactId><version>3.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
