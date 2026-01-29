@@ -119,7 +119,7 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
   }
 
   /**
-   * @see  #PasswordTable(com.pragmatickm.password.model.PasswordTable)
+   * @see  PasswordTable#PasswordTable(com.pragmatickm.password.model.PasswordTable)
    */
   @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   public PasswordTable(
@@ -131,7 +131,7 @@ public class PasswordTable extends Element<com.pragmatickm.password.model.Passwo
   }
 
   /**
-   * @see  #PasswordTable()
+   * @see  PasswordTable#PasswordTable()
    */
   @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   public PasswordTable(String header) {
