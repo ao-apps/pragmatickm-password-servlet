@@ -75,10 +75,10 @@ public final class PasswordTableImpl {
       Iterable<? extends Password> passwords,
       Object style
   ) throws IOException, ServletException {
-    SemanticCMS semanticCms = SemanticCMS.getInstance(servletContext);
-    PageIndex pageIndex = PageIndex.getCurrentPageIndex(request);
+    final SemanticCMS semanticCms = SemanticCMS.getInstance(servletContext);
+    final PageIndex pageIndex = PageIndex.getCurrentPageIndex(request);
     // Combine passwords from both attribute and body
-    List<Password> allPasswords = new ArrayList<>();
+    final List<Password> allPasswords = new ArrayList<>();
     if (passwords != null) {
       for (Password password : passwords) {
         allPasswords.add(password);
