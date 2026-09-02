@@ -130,11 +130,11 @@ public class Password extends Element<com.pragmatickm.password.model.Password> {
     return this;
   }
 
-  /* Already set in constructor
-  public Password password(String password) {
-    element.setPassword(password);
-    return this;
-  }*/
+  // Already set in constructor
+  // public Password password(String password) {
+  //   element.setPassword(password);
+  //   return this;
+  // }
 
   public Password customField(String name, PageRef pageRef, String element, String value) {
     this.element.addCustomField(name, pageRef, element, value);
