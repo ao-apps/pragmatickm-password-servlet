@@ -21,8 +21,6 @@
  * along with pragmatickm-password-servlet.  If not, see <https://www.gnu.org/licenses/>.
  */
 module com.pragmatickm.password.servlet {
-  exports com.pragmatickm.password.servlet;
-  exports com.pragmatickm.password.servlet.impl;
   // Direct
   requires com.aoapps.encoding; // <groupId>com.aoapps</groupId><artifactId>ao-encoding</artifactId>
   requires com.aoapps.encoding.taglib; // <groupId>com.aoapps</groupId><artifactId>ao-encoding-taglib</artifactId>
@@ -40,4 +38,7 @@ module com.pragmatickm.password.servlet {
   requires com.semanticcms.core.model; // <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId>
   requires com.semanticcms.core.servlet; // <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-servlet</artifactId>
   requires static com.github.spotbugs.annotations; // <groupId>com.github.spotbugs</groupId><artifactId>spotbugs-annotations</artifactId>
+
+  exports com.pragmatickm.password.servlet;
+  exports com.pragmatickm.password.servlet.impl;
 }
